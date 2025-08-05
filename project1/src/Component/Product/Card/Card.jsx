@@ -1,0 +1,89 @@
+import React, { useState } from "react";
+import Button from "../../Button/Button";
+import { MdDelete } from "react-icons/md";
+import addToCart from "../../Local/addToCart";
+import Productinfo from "../Modal/Productinfo";
+import deleteProductApi from "../../Api/Auth/Product/deleteProductApi";
+
+const Card = ({ item }) => {
+  const userData = JSON.parse(localStorage.getItem("userDetail"));
+  console.log("userDetail", userData);
+  const [showModal, setShowModal] = useState(false);
+  const [cart, setCart] = useState(false);
+
+  const handleClick = (item) => {
+    setCart((prev) => !prev);
+    if (!cart) addToCart(item);
+  };
+
+  const handleDelete = () => {
+    deleteProductApi({ id: item._id });
+  };
+  return (
+    <div>
+      <div
+        onClick={() => setShowModal(true)}
+        className="w-72 h-[300px] rounded-3xl shadow-xl bg-white bg-opacity-80 backdrop-blur-md border border-gray-100 hover:shadow-2xl transition-transform duration-300 transform hover:scale-[1.025] cursor-pointer flex flex-col overflow-hidden relative"
+      >
+        {userData.role == "admin" && (
+          <div
+            className="w-[25px] h-[25px] bg-red-500 rounded-2xl absolute z-1 flex justify-center items-center top-2 right-2"
+            onClick={(e) => {
+              e.stopPropagation(), handleDelete();
+            }}
+          >
+            <MdDelete className="text-white text-xl" />
+          </div>
+        )}
+
+        <div className="relative h-36 overflow-hidden">
+          <img
+            src={item?.image}
+            alt={item?.pName}
+            className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105"
+          />
+        </div>
+
+        <div className="flex flex-col justify-between flex-grow p-4">
+          <div className="text-[11px] text-center text-gray-500 tracking-wide">
+            {item?.mealtype}
+          </div>
+
+          <div className="flex justify-between items-start mt-1 gap-2">
+            <h3 className="text-[15px] font-medium text-gray-800 w-2/3 line-clamp-2 leading-tight">
+              {item?.pName}
+            </h3>
+          </div>
+
+          {/* Price + Button */}
+          <div className="flex justify-between items-center mt-auto pt-3">
+            <div className="text-[#f58021] font-bold text-[15px]">
+              ${item?.price}
+            </div>
+            <Button
+              onClick={(e) => {
+                e.stopPropagation();
+                handleClick(item);
+              }}
+              title={cart ? "Added to cart" : "Add to cart"}
+              className={`w-32 text-white text-xs font-semibold px-4 py-2 rounded-full shadow-md hover:shadow-lg transition duration-300 ${
+                cart
+                  ? "bg-blue-500 hover:bg-blue-600"
+                  : "bg-gradient-to-r from-[#f58021] to-[#f56200] hover:brightness-110"
+              }`}
+            />
+          </div>
+        </div>
+      </div>
+
+      {/* Modal */}
+      {showModal && (
+        <div className="fixed inset-0 z-50 bg-black/30 backdrop-blur-sm flex items-center justify-center px-4 py-8">
+          <Productinfo data={item} setShowmodel={setShowModal} />
+        </div>
+      )}
+    </div>
+  );
+};
+
+export default Card;
