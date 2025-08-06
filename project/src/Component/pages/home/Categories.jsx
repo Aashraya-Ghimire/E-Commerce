@@ -11,7 +11,7 @@ function Categories({ maindata, setProductData }) {
   ];
   const sort = (name) => {
     let temp = maindata.filter(
-      (item) => item.mealType[0].toLowerCase() == name.toLowerCase()
+      (item) => item.category[0].toLowerCase() == name.toLowerCase()
     );
     setProductData(temp);
     if (name == "All") {

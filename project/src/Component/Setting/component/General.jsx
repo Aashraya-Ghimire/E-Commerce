@@ -38,48 +38,62 @@ const General = () => {
   };
 
   return (
-    <div className="border bg-slate-100 font-medium flex p-6 m-3 md:mx-10 rounded-md border-gray-300 shadow-lg shadow-gray-700/50 gap-8 hover:cursor-pointer hover:border-gray-400 hover:shadow-black/50 hover:bg-slate-50">
-      <div className=" w-full md:w-[45%] px-3 space-y-2">
-        <div className="text-gray-700 font-bold text-xl italic">
-          General Information
-        </div>
-        <div>
+    <div className="bg-white border border-gray-200 shadow-md hover:shadow-lg transition duration-300 rounded-xl p-6 md:p-8 m-3 md:mx-10">
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+        {/* Form Section */}
+        <div className="space-y-4">
+          <div className="text-2xl font-bold text-gray-800 italic border-b pb-2 border-orange-400">
+            General Information
+          </div>
+
           <TextInput
-            err={error == 1 && true}
-            errormessage={"Please provide a valid input"}
-            label={"Name"}
-            placeholder={"Enter your Name"}
+            err={error === 1}
+            errormessage="Please provide a valid input"
+            label="Name"
+            placeholder="Enter your Name"
             ref={nameRef}
           />
           <TextInput
-            err={error == 2 && true}
-            errormessage={"Please provide a valid password"}
-            label={"Email"}
-            placeholder={"Enter your Name"}
+            err={error === 2}
+            errormessage="Please provide a valid password"
+            label="Email"
+            placeholder="Enter your Email"
             ref={emailRef}
           />
           <TextInput
-            err={error == 3 && true}
-            errormessage={"Please provide a valid phone Number"}
-            label={"Contact Number"}
-            placeholder={"Enter your Contact Number"}
+            err={error === 3}
+            errormessage="Please provide a valid phone number"
+            label="Contact Number"
+            placeholder="Enter your Contact Number"
             ref={contactRef}
           />
+
+          <div className="pt-2">
+            <OrangeButton
+              title="Update"
+              onClick={handleUpdate}
+              className="inline-flex px-6 py-2"
+            />
+          </div>
         </div>
-        <div>
-          <OrangeButton title={"Update"} onClick={() => handleUpdate()} />
+
+        {/* Info Text Section */}
+        <div className="hidden md:flex flex-col justify-center gap-4 px-4">
+          <div className="text-center text-xl font-semibold italic text-orange-600">
+            Why Update?
+          </div>
+          <p className="text-gray-600 text-lg leading-relaxed text-justify">
+            Keep your profile information current to ensure smooth communication
+            and better user experience. Update your{" "}
+            <span className="font-medium text-gray-800">name</span>,
+            <span className="font-medium text-gray-800"> email</span>, and
+            <span className="font-medium text-gray-800">
+              {" "}
+              contact number
+            </span>{" "}
+            to maintain accurate account details.
+          </p>
         </div>
-      </div>
-      <div className=" hidden md:flex flex-col justify-center flex-1 gap-3 ">
-        <div className="text-gray-700 font-bold text-xl italic text-center ">
-          General Information
-        </div>
-        <p className="text-gray-500 font-medium lg:text-lg text-justify">
-          Update your name, contact number, and email address from this section
-          to keep your profile information up to date. Manage your personal
-          information here. You can easily update your name, contact number, and
-          email address to keep your account details accurate and current.
-        </p>
       </div>
     </div>
   );

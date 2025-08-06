@@ -11,7 +11,7 @@ const addProductApi = async (productDetail, setProductDetail) => {
     productDetail
   );
   if (request.status == 200) {
-    alert("product add sucessfully");
+    // alert("product add sucessfully");
     setProductDetail({
       pName: "",
       features: [],

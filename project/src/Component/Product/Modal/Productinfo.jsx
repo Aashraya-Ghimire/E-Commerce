@@ -81,7 +81,7 @@ function Productinfo({ data, setShowmodel }) {
         </div>
 
         <div className="mt-2">
-          <h3 className="text-sm font-semibold text-gray-700 mb-1">Sources</h3>
+          <h3 className="text-sm font-semibold text-gray-700 mb-1">Features</h3>
           <ul className="list-disc list-inside text-sm text-gray-600 space-y-[2px]">
             {Array.isArray(data?.features) ? (
               data.features.map((features, index) => (

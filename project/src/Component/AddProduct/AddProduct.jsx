@@ -1,10 +1,11 @@
 import React, { useState } from "react";
-// import Card from "../Product/Component/Card";
 import Card from "../Product/Card/Card";
 import AddProductDetailComponent from "./Component/AddProductDetailComponent";
 import { useLocation } from "react-router-dom";
 import OrangeButton from "../Button/OrangeButton";
 import addProductApi from "../Api/Auth/Product/addProductApi";
+import Swal from "sweetalert2";
+import Navbar from "../NavBar/NavBar";
 
 const AddProduct = () => {
   const location = useLocation();
@@ -15,44 +16,74 @@ const AddProduct = () => {
     price: 0,
     image: "",
     rating: 0,
-    caterory: "",
+    category: "",
     description: "",
   };
 
   const [productDetail, setProductDetail] = useState(data ? data : temp);
-  const handleProduct = () => {
-    addProductApi(productDetail, setProductDetail);
+
+  const handleProduct = async () => {
+    await addProductApi(productDetail, setProductDetail);
+    Swal.fire({
+      title: "Uploading Product...",
+      text: "Please wait while your product is being added.",
+      allowOutsideClick: false,
+      didOpen: () => {
+        Swal.showLoading();
+
+        setTimeout(() => {
+          Swal.close();
+          Swal.fire({
+            icon: "success",
+            title: "Product updated successfully",
+            timer: 1500,
+            showConfirmButton: false,
+          });
+        }, 1000);
+      },
+    });
   };
+
   return (
-    <div className="h-[100xh] p-5 flex flex-col px-20">
-      <div>
-        <h1 className="text-3xl font-bold text-center my-2 italic">
+    <div className="min-h-screen flex flex-col bg-gray-50">
+      <Navbar />
+      <header className="px-4 md:px-16 bg-white shadow-md">
+        <h1 className="text-3xl font-bold text-center text-gray-800">
           {data ? "Update Product" : "Add Product"}
         </h1>
-      </div>
+      </header>
 
-      <div className="flex-1  md:flex gap-10 justify-center items-center">
-        <div className="flex flex-col gap-4 justify-center items-center w-[]  md:w-[40%]">
-          <Card data={productDetail} />
-          <div className=" hidden md:flex  mx-5 font-medium text-gray-500">
+      <main className="flex flex-wrap md:flex-nowrap items-center justify-center flex-1 gap-6 md:gap-12 px-4 md:px-16 py-10 mx-auto">
+        {/* Left Section - Product Preview & Info + Button */}
+        <section className="md:w-2/5 flex flex-col items-center">
+          <Card item={productDetail} />
+          <p className="mt-6 text-center text-gray-600 text-sm md:text-base font-medium max-w-md">
             Add a new product or update existing details here to keep your
             catalog accurate and up to date. Make sure to fill in all required
             fields for the best results.
+          </p>
+
+          {/* Button moved here */}
+          <div className="mt-8 w-full flex justify-center">
+            <OrangeButton
+              title={data ? "Update Product" : "Add Product"}
+              onClick={handleProduct}
+              className="px-12 py-3"
+            />
           </div>
-        </div>
-        <div className="flex-1 ">
-          <div className="text-center text-gray-500 font-semibold italic text-2xl">
+        </section>
+
+        {/* Right Section - Product Details Form */}
+        <section className="md:w-3/6 bg-white p-4 rounded-lg shadow-lg">
+          <h2 className="text-2xl font-semibold  text-center text-gray-700 mb-2">
             Product Detail
-          </div>
+          </h2>
           <AddProductDetailComponent
             setProductDetail={setProductDetail}
             productDetail={productDetail}
           />
-        </div>
-      </div>
-      <div>
-        <OrangeButton title={"Add product"} onClick={() => handleProduct()} />
-      </div>
+        </section>
+      </main>
     </div>
   );
 };

@@ -9,7 +9,7 @@ const Setting = () => {
   return (
     <div className="p-2 flex flex-col h-[100vh]">
       <NavBar />
-      <div className=" flex flex-col my-4 gap-4">
+      <div className=" flex flex-col my-4 gap-4 mt-20">
         <General />
         <Location />
         <Password />

@@ -12,11 +12,14 @@ const updateUserApi = async (updatedData) => {
   );
 
   const response = await request.json();
+  console.log("updatedData", updatedData);
   if (request.status == 200) {
     console.log("request", response);
     localStorage.setItem("userDetail", JSON.stringify(response.response));
     alert("Profile updated sucessfully");
     window.location.href = "/";
+  } else if (request.status == 401) {
+    alert("Hello");
   }
 };
 export default updateUserApi;

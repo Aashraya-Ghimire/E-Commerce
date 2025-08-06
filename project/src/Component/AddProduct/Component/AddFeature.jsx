@@ -14,9 +14,7 @@ const AddFeature = ({ productDetail, setProductDetail }) => {
     setFeatures(""); // clear input after adding
   };
   return (
-    <div className="my-2 space-y-1">
-      <div className="text-sm font-medium text-gray-700">Features:</div>
-
+    <div className="my-2 space-y-2">
       <div className="text-sm">
         Features:{" "}
         {productDetail.features.map((item, index) => (

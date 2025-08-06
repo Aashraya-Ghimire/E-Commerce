@@ -18,13 +18,14 @@ const Location = () => {
   }, [data]);
 
   const handleUpdate = () => {
-    if (cityRef.current?.value == "") {
+    if (cityRef.current?.value === "") {
       setError(1);
-    } else if (streetRef.current?.value == "") {
+    } else if (streetRef.current?.value === "") {
       setError(2);
-    } else if (deliveryDescriptionRef.current?.value == "") {
+    } else if (deliveryDescriptionRef.current?.value === "") {
       setError(3);
     } else {
+      setError(0);
       const updatedData = {
         city: cityRef.current.value,
         street: streetRef.current.value,
@@ -35,49 +36,57 @@ const Location = () => {
   };
 
   return (
-    <div className="border bg-slate-100 font-medium flex p-6 m-3 md:mx-10 rounded-md border-gray-300 shadow-lg shadow-gray-700/50 gap-8 hover:cursor-pointer hover:border-gray-400 hover:shadow-black/50 hover:bg-slate-50">
-      <div className=" w-full md:w-[45%] px-3 space-y-2">
-        <div className="text-gray-700 font-bold text-xl italic">
-          Delivery Information
-        </div>
-        <div>
+    <div className="bg-white border border-gray-200 shadow-md hover:shadow-lg transition duration-300 rounded-xl p-6 md:p-8 m-3 md:mx-10">
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+        {/* Form Section */}
+        <div className="space-y-4 px-3">
+          <div className="text-2xl font-bold text-gray-800 italic border-b pb-2 border-orange-400">
+            Delivery Information
+          </div>
+
           <TextInput
-            err={error == 1 && true}
-            errormessage={"Please provide a valid city"}
-            label={"City"}
-            placeholder={"Enter your City"}
+            err={error === 1}
+            errormessage="Please provide a valid city"
+            label="City"
+            placeholder="Enter your City"
             ref={cityRef}
           />
           <TextInput
-            err={error == 2 && true}
-            errormessage={"Please provide a valid street"}
-            label={"Street"}
-            placeholder={"Enter your Street"}
+            err={error === 2}
+            errormessage="Please provide a valid street"
+            label="Street"
+            placeholder="Enter your Street"
             ref={streetRef}
           />
           <TextInput
-            err={error == 3 && true}
-            errormessage={"Please provide a valid phone Number"}
-            label={"DeliveryDescription"}
-            placeholder={"Enter your Delivery description"}
+            err={error === 3}
+            errormessage="Please provide a valid delivery description"
+            label="Delivery Description"
+            placeholder="Enter any delivery instructions"
             ref={deliveryDescriptionRef}
           />
+
+          <div className="pt-2">
+            <OrangeButton title="Update" onClick={handleUpdate} />
+          </div>
         </div>
-        <div>
-          <OrangeButton title={"Update"} onClick={() => handleUpdate()} />
+
+        {/* Info Section */}
+        <div className="hidden md:flex flex-col justify-center gap-4 px-4">
+          <div className="text-orange-600 font-bold text-xl italic text-center">
+            Why it matters?
+          </div>
+          <p className="text-gray-600 text-lg leading-relaxed text-justify">
+            Add or update your delivery details here to avoid delays. Include
+            your <span className="font-medium text-gray-800">street</span>,{" "}
+            <span className="font-medium text-gray-800">city</span>, and any
+            specific{" "}
+            <span className="font-medium text-gray-800">
+              instructions or landmarks
+            </span>{" "}
+            to help our delivery team reach you faster and more accurately.
+          </p>
         </div>
-      </div>
-      <div className=" hidden md:flex flex-col justify-center flex-1 gap-3 ">
-        <div className="text-gray-700 font-bold text-xl italic text-center ">
-          Delivery Information
-        </div>
-        <p className="text-gray-500 font-medium lg:text-lg text-justify">
-          In this section, you can add or update your delivery details to ensure
-          your orders reach you without any issues. Include accurate information
-          such as your street address, city, and any specific delivery
-          instructions or landmarks. Keeping this information up to date helps
-          us deliver your items faster and more efficiently.
-        </p>
       </div>
     </div>
   );

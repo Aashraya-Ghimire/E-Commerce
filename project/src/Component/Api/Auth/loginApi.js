@@ -10,6 +10,7 @@ const loginApi = async (userInfo, navigate, setErr) => {
     userInfo
   );
   const response = await request.json();
+  console.log(response);
   if (request.status == 200) {
     console.log("response", response);
     localStorage.setItem("token", response.token);

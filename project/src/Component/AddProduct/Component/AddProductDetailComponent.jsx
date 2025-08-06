@@ -1,50 +1,60 @@
-import React, { useState } from "react";
-// import ProductInputField from "../../InputFields/ProductInputField";
+import React from "react";
 import ProductInputField from "../../InputField/ProductInputField";
 import AddFeature from "./AddFeature";
 import AddCategory from "./AddCategory";
 
 const AddProductDetailComponent = ({ setProductDetail, productDetail }) => {
   return (
-    <div>
+    <div className="space-y-4">
+      {/* Product Name */}
       <ProductInputField
         setProductDetail={setProductDetail}
-        label={"Name"}
-        name={"pName"}
+        label="Product Name"
+        name="pName"
         productDetail={productDetail}
       />
 
+      {/* Feature Adder */}
       <AddFeature
         productDetail={productDetail}
         setProductDetail={setProductDetail}
       />
 
-      <ProductInputField
-        setProductDetail={setProductDetail}
-        label={"Rating"}
-        name={"rating"}
-        productDetail={productDetail}
-      />
-      <ProductInputField
-        setProductDetail={setProductDetail}
-        label={"Price"}
-        name={"price"}
-        productDetail={productDetail}
-      />
+      {/* Rating & Price */}
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+        <ProductInputField
+          setProductDetail={setProductDetail}
+          label="Rating"
+          name="rating"
+          productDetail={productDetail}
+        />
+        <ProductInputField
+          setProductDetail={setProductDetail}
+          label="Price"
+          name="price"
+          productDetail={productDetail}
+        />
+      </div>
+
+      {/* Category Selector */}
       <AddCategory
         setProductDetail={setProductDetail}
         productDetail={productDetail}
       />
+
+      {/* Description */}
       <ProductInputField
         setProductDetail={setProductDetail}
-        label={"Description"}
-        name={"description"}
+        label="Description"
+        name="description"
         productDetail={productDetail}
       />
+
+      {/* Image Link */}
       <ProductInputField
         setProductDetail={setProductDetail}
-        label={"Image"}
-        name={"image"}
+        label="Image URL"
+        name="image"
         productDetail={productDetail}
       />
     </div>

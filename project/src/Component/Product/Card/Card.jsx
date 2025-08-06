@@ -1,13 +1,13 @@
 import React, { useState } from "react";
 import Button from "../../Button/Button";
-import { MdDelete } from "react-icons/md";
+import { MdDelete, MdOutlineStarPurple500 } from "react-icons/md";
 import addToCart from "../../Local/addToCart";
 import Productinfo from "../Modal/Productinfo";
 import deleteProductApi from "../../Api/Auth/Product/deleteProductApi";
+import { IoStarOutline } from "react-icons/io5";
 
 const Card = ({ item }) => {
   const userData = JSON.parse(localStorage.getItem("userDetail"));
-  console.log("userDetail", userData);
   const [showModal, setShowModal] = useState(false);
   const [cart, setCart] = useState(false);
 
@@ -46,13 +46,24 @@ const Card = ({ item }) => {
 
         <div className="flex flex-col justify-between flex-grow p-4">
           <div className="text-[11px] text-center text-gray-500 tracking-wide">
-            {item?.mealtype}
+            {item?.category}
           </div>
 
           <div className="flex justify-between items-start mt-1 gap-2">
             <h3 className="text-[15px] font-medium text-gray-800 w-2/3 line-clamp-2 leading-tight">
               {item?.pName}
             </h3>
+          </div>
+          {/* rating */}
+          <div className="flex gap-1 text-yellow-400 text-2xl">
+            {[...Array(Math.floor(item?.rating) || 0)].map((_, i) => (
+              <MdOutlineStarPurple500 key={(_, i)} />
+            ))}
+
+            {[...Array(5 - (Math.floor(item?.rating) || 0))].map((_, i) => (
+              <IoStarOutline key={(_, i)} />
+              // <IoStarOutline/>
+            ))}
           </div>
 
           {/* Price + Button */}
