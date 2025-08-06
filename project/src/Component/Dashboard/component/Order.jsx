@@ -1,7 +1,11 @@
-import React from "react";
+import React, { useEffect } from "react";
+import getOrderApi from "../../Api/Order/getOrderApi";
 
 const Order = () => {
-  return <div>HEllo from order</div>;
+  useEffect(() => {
+    getOrderApi();
+  }, []);
+  return <div>Hello from order</div>;
 };
 
 export default Order;

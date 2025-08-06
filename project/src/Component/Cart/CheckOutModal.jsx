@@ -6,7 +6,9 @@ import Ordersuccess from "./Ordersuccess";
 import { FaMoneyBillWave, FaCreditCard } from "react-icons/fa";
 import OrangeButton from "../Button/OrangeButton";
 import { IoCloseSharp } from "react-icons/io5";
-
+import generateCartItem from "../CustomFunction/generateCartItem";
+import { useNavigate } from "react-router-dom";
+import addOrderApi from "../Api/Order/addOrderApi";
 function CheckOutModal({ visible, setVisible, dta }) {
   const [success, setSuccess] = useState(false);
 
@@ -17,29 +19,37 @@ function CheckOutModal({ visible, setVisible, dta }) {
   const emailaddress = useRef("");
   const [paymentMethod, setPaymentMethod] = useState("cash");
 
-  const handleProcess = () => {
-    if (name.current?.value.trim().length < 3) {
-      setErr(1);
-    } else if (
-      !phone.current?.value ||
-      !/^\d+$/.test(phone.current.value) ||
-      phone.current.value.length < 8 ||
-      phone.current.value.length > 10 ||
-      phone.current.value.length === 9
-    ) {
-      setErr(2);
-    } else if (address.current?.value.trim() === "") {
-      setErr(3);
-    } else if (
-      emailaddress.current?.value.trim() === "" ||
-      !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(emailaddress.current.value.trim())
-    ) {
-      setErr(4);
-    } else {
-      setErr(0);
-      setSuccess(true);
-      localStorage.removeItem("cart");
-    }
+  // const handleProcess = () => {
+  //   if (name.current?.value.trim().length < 3) {
+  //     setErr(1);
+  //   } else if (
+  //     !phone.current?.value ||
+  //     !/^\d+$/.test(phone.current.value) ||
+  //     phone.current.value.length < 8 ||
+  //     phone.current.value.length > 10 ||
+  //     phone.current.value.length === 9
+  //   ) {
+  //     setErr(2);
+  //   } else if (address.current?.value.trim() === "") {
+  //     setErr(3);
+  //   } else if (
+  //     emailaddress.current?.value.trim() === "" ||
+  //     !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(emailaddress.current.value.trim())
+  //   ) {
+  //     setErr(4);
+  //   } else {
+  //     setErr(0);
+  //     setSuccess(true);
+  //     localStorage.removeItem("cart");
+  //   }
+  // };
+  const navigate = useNavigate();
+  const handleOrder = () => {
+    const tempData = {
+      totalAmount: totalAmount(dta),
+      items: generateCartItem(dta),
+    };
+    addOrderApi(tempData, navigate);
   };
 
   return (
@@ -177,7 +187,7 @@ function CheckOutModal({ visible, setVisible, dta }) {
                 <div className="space-y-3 max-h-[300px] overflow-y-auto">
                   {dta.map((item) => (
                     <div
-                      key={item.id}
+                      key={item._id}
                       className="flex justify-between items-center bg-gray-100 px-4 py-2 rounded-lg"
                     >
                       <span className="w-1/2 text-gray-800 truncate">
@@ -198,8 +208,14 @@ function CheckOutModal({ visible, setVisible, dta }) {
                     <span>${totalAmount(dta)}</span>
                   </div>
                 </div>
-                <div className="pt-2 flex justify-center">
+                {/* <div className="pt-2 flex justify-center">
                   <OrangeButton title="Process Order" onClick={handleProcess} />
+                </div> */}
+                <div className="pt-2 flex justify-center">
+                  <OrangeButton
+                    title="Process checkout"
+                    onClick={handleOrder}
+                  />
                 </div>
                 {success && (
                   <Ordersuccess success={success} setSuccess={setSuccess} />

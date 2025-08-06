@@ -62,7 +62,6 @@ const Card = ({ item }) => {
 
             {[...Array(5 - (Math.floor(item?.rating) || 0))].map((_, i) => (
               <IoStarOutline key={(_, i)} />
-              // <IoStarOutline/>
             ))}
           </div>
 

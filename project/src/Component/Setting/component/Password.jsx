@@ -2,12 +2,14 @@ import React, { useRef, useState } from "react";
 import TextInput from "../../InputField/TextInput";
 import OrangeButton from "../../Button/OrangeButton";
 import changePassword from "../../Api/User/changePassword";
+import { FaQuestionCircle, FaTimesCircle } from "react-icons/fa";
 
 const Password = () => {
   const token = localStorage.getItem("token");
   const prevPasswordRef = useRef();
   const currentPasswordRef = useRef();
   const [error, setError] = useState(0);
+  const [showUpdateModal, setShowUpdateModal] = useState(false);
 
   const handleUpdate = () => {
     if (prevPasswordRef.current?.value.length < 8) {
@@ -49,7 +51,12 @@ const Password = () => {
           />
 
           <div className="pt-2">
-            <OrangeButton title="Update" onClick={handleUpdate} />
+            <OrangeButton
+              title="Update"
+              onClick={() => {
+                setShowUpdateModal(true);
+              }}
+            />
           </div>
         </div>
 
@@ -68,6 +75,41 @@ const Password = () => {
           </p>
         </div>
       </div>
+      {/* Update Modal */}
+      {showUpdateModal && (
+        <div className="fixed inset-0 z-50 bg-opacity-50 backdrop-blur-[7px] flex items-center justify-center">
+          <div className="bg-white rounded-xl p-6 w-[90%] max-w-md text-center shadow-lg animate-fade-in">
+            <div className="flex justify-center mb-4 text-blue-600 text-4xl">
+              <FaQuestionCircle />
+            </div>
+            <h2 className="text-xl font-semibold text-gray-800 mb-2">
+              Confirm Update?
+            </h2>
+            <p className="text-gray-500 mb-6">
+              Are you sure you want to update this information?
+            </p>
+            <div className="flex justify-center gap-4">
+              <button
+                onClick={() => setShowUpdateModal(false)}
+                className="flex items-center gap-2 px-5 py-2 bg-gray-200 hover:bg-gray-300 text-gray-700 font-medium rounded-md transition-all"
+              >
+                <FaTimesCircle />
+                Cancel
+              </button>
+              <button
+                onClick={() => {
+                  handleUpdate(), setShowUpdateModal(false);
+                  console.log("Update confirmed");
+                }}
+                className="flex items-center gap-2 px-5 py-2 bg-blue-500 hover:bg-blue-600 text-white font-medium rounded-md transition-all"
+              >
+                <FaQuestionCircle />
+                Yes, Update
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
     </div>
   );
 };

@@ -7,6 +7,7 @@ import addProductApi from "../Api/Auth/Product/addProductApi";
 import Swal from "sweetalert2";
 import Navbar from "../NavBar/NavBar";
 import updateProductApi from "../Api/Auth/Product/updateProductApi";
+import { MdKeyboardBackspace } from "react-icons/md";
 
 const AddProduct = () => {
   const navigate = useNavigate();
@@ -37,6 +38,12 @@ const AddProduct = () => {
   return (
     <div className="min-h-screen flex flex-col bg-gray-50">
       <Navbar />
+      <div
+        className="mt-20 absolute text-white p-1 px-2 bg-gray-500 hover:bg-gray-600 rounded-md w-fit font-medium flex items-center gap-2 text-sm cursor-pointer"
+        onClick={() => navigate(-1)}
+      >
+        <MdKeyboardBackspace size={20} /> <span>Go Back</span>
+      </div>
       <header className="px-4 md:px-16 bg-white shadow-md">
         <h1 className="text-3xl font-bold text-center text-gray-800">
           {data ? "Update Product" : "Add Product"}

@@ -17,7 +17,6 @@ function App() {
   useEffect(() => {
     productDataApi(setProductData, setMaindata);
   }, []);
-  console.log("product data", productData);
   return (
     <div className="bg-[#F7F7F7]">
       <Navbar />

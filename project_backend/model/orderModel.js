@@ -1,5 +1,4 @@
 const mongoose = require("mongoose");
-
 const orderSchema = new mongoose.Schema({
   totalAmount: {
     type: Number,
@@ -8,12 +7,16 @@ const orderSchema = new mongoose.Schema({
     type: String,
   },
   items: {
-    itemName: {
-      type: String,
-    },
-    quantity: {
-      type: String,
-    },
+    type: [
+      {
+        itemName: {
+          type: String,
+        },
+        quantity: {
+          type: String,
+        },
+      },
+    ],
   },
   cName: {
     type: String,

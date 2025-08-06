@@ -3,7 +3,7 @@ import { useState } from "react";
 const removeFromCart = (item, setDta) => {
   const cartData = localStorage.getItem("cart");
   const actualData = JSON.parse(cartData);
-  const updatedData = actualData.filter((data) => data.id != item.id);
+  const updatedData = actualData.filter((data) => data._id != item._id);
   localStorage.setItem("cart", JSON.stringify(updatedData));
   setDta(updatedData);
 };
