@@ -1,13 +1,15 @@
 import React, { useState } from "react";
 import Card from "../Product/Card/Card";
 import AddProductDetailComponent from "./Component/AddProductDetailComponent";
-import { useLocation } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import OrangeButton from "../Button/OrangeButton";
 import addProductApi from "../Api/Auth/Product/addProductApi";
 import Swal from "sweetalert2";
 import Navbar from "../NavBar/NavBar";
+import updateProductApi from "../Api/Auth/Product/updateProductApi";
 
 const AddProduct = () => {
+  const navigate = useNavigate();
   const location = useLocation();
   const data = location.state;
   const temp = {
@@ -24,24 +26,12 @@ const AddProduct = () => {
 
   const handleProduct = async () => {
     await addProductApi(productDetail, setProductDetail);
-    Swal.fire({
-      title: "Uploading Product...",
-      text: "Please wait while your product is being added.",
-      allowOutsideClick: false,
-      didOpen: () => {
-        Swal.showLoading();
-
-        setTimeout(() => {
-          Swal.close();
-          Swal.fire({
-            icon: "success",
-            title: "Product updated successfully",
-            timer: 1500,
-            showConfirmButton: false,
-          });
-        }, 1000);
-      },
-    });
+    alert("product added successfully");
+  };
+  const handleUpdateProduct = () => {
+    const tempData = productDetail;
+    tempData.id = productDetail._id;
+    updateProductApi(productDetail);
   };
 
   return (
@@ -65,11 +55,21 @@ const AddProduct = () => {
 
           {/* Button moved here */}
           <div className="mt-8 w-full flex justify-center">
-            <OrangeButton
-              title={data ? "Update Product" : "Add Product"}
-              onClick={handleProduct}
-              className="px-12 py-3"
-            />
+            {data ? (
+              <OrangeButton
+                title={"Update Product"}
+                onClick={() => {
+                  handleUpdateProduct();
+                }}
+                className="px-12 py-3"
+              />
+            ) : (
+              <OrangeButton
+                title={"Add Product"}
+                onClick={handleProduct}
+                className="px-12 py-3"
+              />
+            )}
           </div>
         </section>
 

@@ -36,6 +36,7 @@ route.patch("/", async (req, res) => {
       .status(200)
       .json({ message: "Data updated sucessfully", response: response });
   } catch (error) {
+    console.log("patch", error);
     res.status(500).json({ message: "Internal server error" });
   }
 });

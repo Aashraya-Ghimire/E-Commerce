@@ -13,6 +13,10 @@ const AddFeature = ({ productDetail, setProductDetail }) => {
     });
     setFeatures(""); // clear input after adding
   };
+  const handleRemoveFeature = () => {
+    setFeatures(" ");
+    setProductDetail({ ...productDetail, features: [] });
+  };
   return (
     <div className="my-2 space-y-2">
       <div className="text-sm">
@@ -21,15 +25,16 @@ const AddFeature = ({ productDetail, setProductDetail }) => {
           <span key={index}>{item}, </span>
         ))}
       </div>
-
-      <input
-        type="text"
-        value={features}
-        onChange={(e) => setFeatures(e.target.value)}
-        className="border outline-none rounded-md p-1 w-full"
-      />
-
-      <OrangeButton title="Add +" onClick={handleAddFeature} />
+      <div className="flex items-center justify-center gap-2">
+        <input
+          type="text"
+          value={features}
+          onChange={(e) => setFeatures(e.target.value)}
+          className="border outline-none rounded-md p-1 w-full"
+        />
+        <OrangeButton title="Add" onClick={() => handleAddFeature()} />
+        <OrangeButton title="Remove" onClick={() => handleRemoveFeature()} />
+      </div>
     </div>
   );
 };

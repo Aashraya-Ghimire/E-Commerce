@@ -4,9 +4,15 @@ import { MdOutlineStarPurple500 } from "react-icons/md";
 import { IoIosArrowBack } from "react-icons/io";
 import { IoStarOutline } from "react-icons/io5";
 import OrangeButton from "../../Button/OrangeButton";
+import { useNavigate } from "react-router-dom";
 
 function Productinfo({ data, setShowmodel }) {
+  const navigate = useNavigate();
   const userData = JSON.parse(localStorage.getItem("userDetail"));
+
+  const navigateFunction = () => {
+    navigate("/product", { state: data });
+  };
 
   return (
     <div
@@ -98,7 +104,7 @@ function Productinfo({ data, setShowmodel }) {
             ${data?.price}
           </span>
           {userData.role == "admin" ? (
-            <OrangeButton title={"Update"} />
+            <OrangeButton title={"Update"} onClick={() => navigateFunction()} />
           ) : (
             <button
               onClick={() => alert("Added to cart")}
