@@ -4,35 +4,40 @@ import { useNavigate } from "react-router";
 
 const DashNav = ({ activeScreen, setActiveScreen }) => {
   const navigate = useNavigate();
+
+  const navItemStyle = (isActive) =>
+    `flex items-center gap-3 p-3 rounded-lg cursor-pointer transition-all duration-200 
+     ${
+       isActive
+         ? "bg-orange-500 shadow-lg shadow-orange-200 text-white"
+         : "bg-orange-100 text-orange-800 hover:bg-orange-200"
+     }
+     hover:scale-[1.02]`;
+
   return (
-    <div className="w-[15%] bg-orange-300 p-2 space-y-4">
+    <div className="w-[15%] min-h-screen bg-gradient-to-b from-orange-100 to-orange-300 p-4 space-y-4 shadow-inner border-r border-orange-200">
       <div
-        className={`flex items-center gap-3 p-2 bg-orange-400 text-white rounded-md border border-orange-400 hover:border-orange-50 hover:shadow-sm font-medium hover:shadow-white ${
-          activeScreen == 1 && "bg-orange-500 shadow-md shadow-orange-100/50"
-        }`}
+        className={navItemStyle(activeScreen === 1)}
         onClick={() => setActiveScreen(1)}
       >
-        <RiDashboardFill />
-        <span>Dashboard</span>
-      </div>
-      <div
-        className={`flex items-center gap-3 p-2 bg-orange-400 text-white rounded-md border border-orange-400 hover:border-orange-50 hover:shadow-sm font-medium hover:shadow-white ${
-          activeScreen == 2 && "bg-orange-500 shadow-md shadow-orange-100/50"
-        }`}
-        onClick={() => setActiveScreen(2)}
-      >
-        <RiDashboardFill />
-        <span>Order</span>
+        <RiDashboardFill className="text-xl group-hover:animate-pulse" />
+        <span className="font-semibold text-base">Dashboard</span>
       </div>
 
       <div
-        className={`flex items-center gap-3 p-2 bg-orange-400 text-white rounded-md border border-orange-400 hover:border-orange-50 hover:shadow-sm font-medium hover:shadow-white ${
-          activeScreen == 3 && "bg-orange-500 shadow-md shadow-orange-100/50"
-        }`}
+        className={navItemStyle(activeScreen === 2)}
+        onClick={() => setActiveScreen(2)}
+      >
+        <RiDashboardFill className="text-xl" />
+        <span className="font-semibold text-base">Order</span>
+      </div>
+
+      <div
+        className={navItemStyle(activeScreen === 3)}
         onClick={() => navigate("/product")}
       >
-        <RiDashboardFill />
-        <span>Add Product</span>
+        <RiDashboardFill className="text-xl" />
+        <span className="font-semibold text-base">Add Product</span>
       </div>
     </div>
   );

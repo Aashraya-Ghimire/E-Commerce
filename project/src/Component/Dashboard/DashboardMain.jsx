@@ -1,33 +1,32 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import DashNav from "./component/DashNav";
-import Dashboard from "./Component/Dashboard";
-import Order from "./Component/Order";
+// import Dashboard from "./Components/Dashboard";
+import Dashboard from "./component/Dashboard";
+import Order from "./component/Order";
+import getOrderApi from "../Api/Order/getOrderApi";
+import { useOutletContext } from "react-router";
 
 const DashboardMain = () => {
+  const userData = JSON.parse(localStorage.getItem("userDetail"));
+  if (!userData || userData.role != "admin") {
+    window.location.href = "/";
+    return;
+  }
+  const mainData = useOutletContext;
   const [activeScreen, setActiveScreen] = useState(1);
+  const [orderData, setOrderData] = useState([]);
 
-  const renderScreen = () => {
-    switch (activeScreen) {
-      case 1:
-        return <Dashboard />;
-      case 2:
-        return <Order />;
-      default:
-        return <Dashboard />;
-    }
-  };
-
+  useEffect(() => {
+    getOrderApi(setOrderData);
+  }, []);
   return (
-    <div className="flex h-screen bg-gradient-to-br from-sky-50 via-blue-100 to-sky-200 overflow-hidden">
-      {/* Side Navigation */}
+    <div className="flex h-[100vh] bg-sky-50">
       <DashNav activeScreen={activeScreen} setActiveScreen={setActiveScreen} />
 
-      {/* Content Area */}
-      <div className="flex-1 p-6 overflow-y-auto transition-all duration-300 ease-in-out">
-        <div className="bg-white shadow-xl rounded-2xl p-6 md:p-10 min-h-[90vh] w-full mx-auto animate-fade-in">
-          {renderScreen()}
-        </div>
-      </div>
+      {activeScreen == 1 && (
+        <Dashboard orderData={orderData} productData={mainData} />
+      )}
+      {activeScreen == 2 && <Order orderData={orderData} />}
     </div>
   );
 };

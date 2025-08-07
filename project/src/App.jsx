@@ -5,23 +5,21 @@ import Landing from "./Component/pages/home/Landing";
 import productDataApi from "./Component/Api/productData.api";
 import Categories from "./Component/pages/home/Categories";
 import Product from "./Component/Product/Product";
-// import { useNavigate } from "react-router";
+import { useOutletContext } from "react-router";
 function App() {
-  // const navigate = useNavigate();
-  // const token = localStorage.getItem("token");
-  // if (!token) {
-  //   navigate("/auth");
-  // }
+  const mainData = useOutletContext();
   const [productData, setProductData] = useState([]);
-  const [maindata, setMaindata] = useState([]);
-  useEffect(() => {
-    productDataApi(setProductData, setMaindata);
-  }, []);
+  useEffect(
+    () => {
+      setProductData(mainData);
+    },
+    { mainData }
+  );
   return (
     <div className="bg-[#F7F7F7]">
       <Navbar />
       <Landing />
-      <Categories maindata={maindata} setProductData={setProductData} />
+      <Categories maindata={mainData} setProductData={setProductData} />
       <Product productData={productData} />
       <Footer />
     </div>

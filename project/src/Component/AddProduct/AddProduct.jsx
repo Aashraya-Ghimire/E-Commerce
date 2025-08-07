@@ -3,14 +3,18 @@ import Card from "../Product/Card/Card";
 import AddProductDetailComponent from "./Component/AddProductDetailComponent";
 import { useLocation, useNavigate } from "react-router-dom";
 import OrangeButton from "../Button/OrangeButton";
-import addProductApi from "../Api/Auth/Product/addProductApi";
-import Swal from "sweetalert2";
+import addProductApi from "../Api/Product/addProductApi";
 import Navbar from "../NavBar/NavBar";
-import updateProductApi from "../Api/Auth/Product/updateProductApi";
+import updateProductApi from "../Api/Product/updateProductApi";
 import { MdKeyboardBackspace } from "react-icons/md";
 
 const AddProduct = () => {
   const navigate = useNavigate();
+  const userData = JSON.parse(localStorage.getItem("userDetail"));
+  if (!userData || userData.role != "admin") {
+    window.location.href = "/";
+    return;
+  }
   const location = useLocation();
   const data = location.state;
   const temp = {

@@ -1,8 +1,9 @@
-import SecureFetch from "../ApiConfiguration";
+import SecureFetch from "../Auth/ApiConfiguration";
+import mainEndpoint from "../mainEndpoint";
 
 const updateProductApi = async (productDetail) => {
   const request = await SecureFetch(
-    "http://localhost:3000/product",
+    mainEndpoint + "/product",
     "PATCH",
     {
       "content-type": "application/json",

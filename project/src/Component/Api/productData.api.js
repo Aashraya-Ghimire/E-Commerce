@@ -1,9 +1,12 @@
-const productDataApi = async (setProductData, setMaindata) => {
-  const request = await fetch("http://localhost:3000/product");
+import mainEndpoint from "./mainEndpoint";
+
+const productDataApi = async (setMaindata) => {
+  const request = await fetch(mainEndpoint + "/product");
   const response = await request.json();
   if (request.status == 200) {
-    setProductData(response.data);
     setMaindata(response.data);
+  } else {
+    setMaindata([]);
   }
 };
 export default productDataApi;

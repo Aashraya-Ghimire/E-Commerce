@@ -1,23 +1,42 @@
 import React from "react";
+import {
+  FaBoxOpen,
+  FaShoppingCart,
+  FaDollarSign,
+  FaClock,
+} from "react-icons/fa";
 
-const Dashboard = () => {
+const Dashboard = ({ orderData = [] }) => {
   return (
-    <div className=" flex-1 flex p-4 flex-wrap justify-center gap-8">
-      <div className="border p-3 rounded-lg border-gray-500 h-fit bg-sky-200 text-lg font-semibold  text-gray-700 flex flex-col items-center w-40">
-        <p>No of Products:</p>
-        <p className="text-xl text-gray-800 font-bold">{10}</p>
+    <div className="flex-1 p-6 flex flex-wrap justify-center gap-6 bg-gradient-to-br from-sky-100 to-sky-200 rounded-lg shadow-inner">
+      {/* Product Count */}
+      <div className="h-fit bg-white shadow-md hover:shadow-xl transition-shadow border border-gray-300 rounded-xl w-52 p-5 flex flex-col items-center">
+        <FaBoxOpen className="text-3xl text-sky-600 mb-2" />
+        <p className="text-gray-600 font-medium">No of Products</p>
+        <p className="text-2xl font-bold text-gray-800 mt-1">10</p>
       </div>
-      <div className="border p-3 rounded-lg border-gray-500 h-fit bg-sky-200 text-lg font-semibold  text-gray-700 flex flex-col items-center w-40">
-        <p>No of Order:</p>
-        <p className="text-xl text-gray-800 font-bold">{10}</p>
+
+      {/* Order Count */}
+      <div className="h-fit bg-white shadow-md hover:shadow-xl transition-shadow border border-gray-300 rounded-xl w-52 p-5 flex flex-col items-center">
+        <FaShoppingCart className="text-3xl text-green-600 mb-2" />
+        <p className="text-gray-600 font-medium">No of Orders</p>
+        <p className="text-2xl font-bold text-gray-800 mt-1">
+          {orderData.length}
+        </p>
       </div>
-      <div className="border p-3 rounded-lg border-gray-500 h-fit bg-sky-200 text-lg font-semibold  text-gray-700 flex flex-col items-center w-40">
-        <p>Total Sales:</p>
-        <p className="text-xl text-gray-800 font-bold">{10}</p>
+
+      {/* Total Sales */}
+      <div className="h-fit bg-white shadow-md hover:shadow-xl transition-shadow border border-gray-300 rounded-xl w-52 p-5 flex flex-col items-center">
+        <FaDollarSign className="text-3xl text-yellow-600 mb-2" />
+        <p className="text-gray-600 font-medium">Total Sales</p>
+        <p className="text-2xl font-bold text-gray-800 mt-1">$10</p>
       </div>
-      <div className="border p-3 rounded-lg border-gray-500 h-fit bg-sky-200 text-lg font-semibold  text-gray-700 flex flex-col items-center w-40">
-        <p>Pending Order:</p>
-        <p className="text-xl text-gray-800 font-bold">{10}</p>
+
+      {/* Pending Orders */}
+      <div className="h-fit bg-white shadow-md hover:shadow-xl transition-shadow border border-gray-300 rounded-xl w-52 p-5 flex flex-col items-center">
+        <FaClock className="text-3xl text-red-500 mb-2" />
+        <p className="text-gray-600 font-medium">Pending Orders</p>
+        <p className="text-2xl font-bold text-gray-800 mt-1">10</p>
       </div>
     </div>
   );

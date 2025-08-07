@@ -1,11 +1,16 @@
 import SecureFetch from "../Auth/ApiConfiguration";
+import mainEndpoint from "../mainEndpoint";
 
-const getOrderApi = async () => {
-  const request = await SecureFetch("http://localhost:3000/user/order", "GET", {
+const getOrderApi = async (setOrderData) => {
+  const request = await SecureFetch(mainEndpoint + "/order", "GET", {
     "content-type": "application/json",
     Authorization: `Bearer ${localStorage.getItem("token")}`,
   });
   const response = await request.json();
-  console.log("response of order", response);
+  if (request.status == 200) {
+    setOrderData(response.data);
+  } else {
+    setOrderData([]);
+  }
 };
 export default getOrderApi;

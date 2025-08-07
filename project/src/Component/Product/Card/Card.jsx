@@ -3,7 +3,7 @@ import Button from "../../Button/Button";
 import { MdDelete, MdOutlineStarPurple500 } from "react-icons/md";
 import addToCart from "../../Local/addToCart";
 import Productinfo from "../Modal/Productinfo";
-import deleteProductApi from "../../Api/Auth/Product/deleteProductApi";
+import deleteProductApi from "../../Api/Product/deleteProductApi";
 import { IoStarOutline } from "react-icons/io5";
 
 const Card = ({ item }) => {

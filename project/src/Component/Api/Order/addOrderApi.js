@@ -1,8 +1,9 @@
 import SecureFetch from "../Auth/ApiConfiguration";
+import mainEndpoint from "../mainEndpoint";
 
 const addOrderApi = async (orderData, navigate) => {
   const request = await SecureFetch(
-    "http://localhost:3000/order",
+    mainEndpoint + "/order",
     "POST",
     {
       "content-type": "application/json",
