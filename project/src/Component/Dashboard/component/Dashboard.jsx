@@ -6,14 +6,16 @@ import {
   FaClock,
 } from "react-icons/fa";
 
-const Dashboard = ({ orderData = [] }) => {
+const Dashboard = ({ orderData, productData }) => {
   return (
     <div className="flex-1 p-6 flex flex-wrap justify-center gap-6 bg-gradient-to-br from-sky-100 to-sky-200 rounded-lg shadow-inner">
       {/* Product Count */}
       <div className="h-fit bg-white shadow-md hover:shadow-xl transition-shadow border border-gray-300 rounded-xl w-52 p-5 flex flex-col items-center">
         <FaBoxOpen className="text-3xl text-sky-600 mb-2" />
         <p className="text-gray-600 font-medium">No of Products</p>
-        <p className="text-2xl font-bold text-gray-800 mt-1">10</p>
+        <p className="text-2xl font-bold text-gray-800 mt-1">
+          {productData.length}
+        </p>
       </div>
 
       {/* Order Count */}

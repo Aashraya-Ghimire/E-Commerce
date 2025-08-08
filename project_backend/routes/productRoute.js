@@ -1,6 +1,7 @@
 const express = require("express");
 const route = express.Router();
 const Product = require("../model/productModel");
+const { jwtAuthMiddleWare } = require("../jwt");
 
 route.get("/", async (req, res) => {
   try {
@@ -13,7 +14,7 @@ route.get("/", async (req, res) => {
   }
 });
 
-route.post("/", async (req, res) => {
+route.post("/", jwtAuthMiddleWare, async (req, res) => {
   try {
     const data = req.body;
     const product = new Product(data);
