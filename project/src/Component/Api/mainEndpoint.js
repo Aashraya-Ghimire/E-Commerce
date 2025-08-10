@@ -1,2 +1,2 @@
-const mainEndpoint = "http://localhost:3000";
+const mainEndpoint = "https://food-e-commerce-backend.onrender.com";
 export default mainEndpoint;

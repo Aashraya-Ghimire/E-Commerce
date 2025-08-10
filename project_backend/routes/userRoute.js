@@ -31,17 +31,13 @@ route.post("/login", async (req, res) => {
   try {
     const { userName, password } = req.body;
     const user = await User.findOne({ userName: userName });
-
     if (!user || !(await user.comparePassword(password))) {
       res.status(400).json({ message: "username or password is invalid" });
     }
-    res
-      .status(200)
-      .json({
-        message: "user login sucessfull",
-        response: user,
-        token: user.token,
-      });
+    res.status(200).json({
+      message: "user login sucessfull",
+      response: user,
+    });
   } catch (error) {
     console.log("error", error);
     res.status(500).json({ message: "Internal server error", error: error });
@@ -59,7 +55,7 @@ route.delete("/", jwtAuthMiddleWare, async (req, res) => {
   }
 });
 
-route.patch("/update", jwtAuthMiddleWare, async (req, res) => {
+route.patch("/", jwtAuthMiddleWare, async (req, res) => {
   try {
     const { prevPassword, currentPassword } = req.body;
     const userId = req.user.id;
