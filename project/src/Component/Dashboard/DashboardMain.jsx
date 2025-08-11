@@ -7,9 +7,9 @@ import { useOutletContext } from "react-router";
 
 const DashboardMain = () => {
   const userData = JSON.parse(localStorage.getItem("userDetail"));
-  if (!userData || userData.role != "admin") {
+  if (!userData || userData.role !== "admin") {
     window.location.href = "/";
-    return;
+    return null;
   }
   const mainData = useOutletContext();
   const [activeScreen, setActiveScreen] = useState(1);
@@ -18,18 +18,26 @@ const DashboardMain = () => {
   useEffect(() => {
     getOrderApi(setOrderData);
   }, []);
-  return (
-    <div className="flex h-[100vh] bg-sky-50">
-      <DashNav
-        activeScreen={activeScreen}
-        setActiveScreen={setActiveScreen}
-        className="fixed"
-      />
 
-      {activeScreen == 1 && (
-        <Dashboard orderData={orderData} productData={mainData} />
-      )}
-      {activeScreen == 2 && <Order orderData={orderData} />}
+  return (
+    <div className="flex flex-col md:flex-row h-screen bg-sky-50">
+      <DashNav activeScreen={activeScreen} setActiveScreen={setActiveScreen} />
+
+      <main
+        className="
+          flex-1
+          pt-[60px]       /* padding top equal to mobile nav height */
+          md:pt-0         /* no padding top on desktop */
+          md:ml-[15%]     /* margin left for desktop sidebar width */
+          overflow-auto
+          min-h-0         /* fixes flex overflow issues */
+        "
+      >
+        {activeScreen === 1 && (
+          <Dashboard orderData={orderData} productData={mainData} />
+        )}
+        {activeScreen === 2 && <Order orderData={orderData} />}
+      </main>
     </div>
   );
 };

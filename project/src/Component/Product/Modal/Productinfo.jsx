@@ -36,7 +36,7 @@ function Productinfo({ data, setShowmodel, item }) {
           className="w-full h-full object-cover"
         />
         <button
-          className="h-8 w-8 absolute top-2 left-2 z-10 bg-[#fa7516] rounded-full text-white text-xl flex items-center justify-center"
+          className="h-8 w-8 absolute top-2 left-2 z-10 bg-red-500 rounded-full text-white text-xl flex items-center justify-center"
           onClick={() => setShowmodel(false)}
         >
           <IoIosArrowBack />
@@ -46,7 +46,7 @@ function Productinfo({ data, setShowmodel, item }) {
       <div className="w-full md:w-1/2 p-4 flex flex-col justify-between">
         <div>
           <div className="text-sm text-gray-400 uppercase tracking-widest mb-1 text-center md:text-left">
-            {data?.mealtype}
+            {data?.category}
           </div>
 
           <div className="flex justify-between items-start gap-1 mb-3">
@@ -72,7 +72,7 @@ function Productinfo({ data, setShowmodel, item }) {
               {data.tags.map((tag, idx) => (
                 <span
                   key={idx}
-                  className="bg-orange-100 text-orange-600 text-xs px-3 py-[2px] rounded-full font-medium"
+                  className="bg-orange-100 text-green-400 text-xs px-3 py-[2px] rounded-full font-medium"
                 >
                   #{tag}
                 </span>
@@ -82,7 +82,7 @@ function Productinfo({ data, setShowmodel, item }) {
         </div>
 
         <div className="flex items-center justify-between text-xs text-gray-600 mb-3">
-          <div className="flex items-center gap-1 bg-gray-100 px-2 py-1.5 rounded-lg">
+          {/* <div className="flex items-center gap-1 bg-gray-100 px-2 py-1.5 rounded-lg">
             <span className="font-semibold text-gray-700">⏱</span>
             <span>{data?.cookTimeMinutes} min</span>
           </div>
@@ -93,6 +93,15 @@ function Productinfo({ data, setShowmodel, item }) {
           <div className="flex items-center gap-1 bg-gray-100 px-2 py-1.5 rounded-lg">
             <span className="font-semibold text-gray-700">🔥</span>
             <span className="capitalize">{data?.difficulty}</span>
+          </div> */}
+
+          <div className="mb-4">
+            <div className="text-gray-700 font-semibold mb-1 text-lg">
+              Description
+            </div>
+            <p className="text-gray-600 text-sm leading-relaxed">
+              {data?.description}
+            </p>
           </div>
         </div>
 
@@ -110,7 +119,7 @@ function Productinfo({ data, setShowmodel, item }) {
         </div>
 
         <div className="flex justify-between items-center mt-3">
-          <span className="text-xl font-extrabold text-[#fa7516]">
+          <span className="text-xl font-semibold text-green-400">
             ${data?.price}
           </span>
           {userData.role == "admin" ? (
@@ -125,7 +134,7 @@ function Productinfo({ data, setShowmodel, item }) {
               className={`w-32 text-white text-xs font-semibold px-4 py-2 rounded-full shadow-md hover:shadow-lg transition duration-300 ${
                 cart
                   ? "bg-blue-500 hover:bg-blue-600"
-                  : "bg-gradient-to-r from-[#f58021] to-[#f56200] hover:brightness-110"
+                  : "bg-green-600 hover:brightness-110"
               }`}
             />
           )}

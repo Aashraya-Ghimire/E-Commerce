@@ -34,7 +34,7 @@ function CheckOutModal({ visible, setVisible, dta }) {
       >
         <div className="w-full max-w-6xl h-[90vh] bg-white rounded-2xl shadow-2xl flex flex-col overflow-hidden border border-gray-300">
           {/* Header */}
-          <div className="px-6 py-5 bg-orange-500 flex items-center justify-between">
+          <div className="px-6 py-5 bg-red-500 flex items-center justify-between">
             <div className="flex items-center gap-4">
               <div className="w-12 h-12 bg-white/30 text-white rounded-full flex items-center justify-center text-2xl">
                 <FiShoppingCart />
@@ -47,7 +47,7 @@ function CheckOutModal({ visible, setVisible, dta }) {
               </div>
             </div>
             <button
-              className="p-2 rounded-full bg-white text-orange-500 hover:bg-orange-100 shadow"
+              className="p-2 rounded-full bg-white text-red-500 hover:bg-orange-100 shadow"
               onClick={() => setVisible(false)}
               aria-label="Close"
             >
@@ -70,7 +70,7 @@ function CheckOutModal({ visible, setVisible, dta }) {
                     htmlFor="cash"
                     className={`flex items-center gap-4 p-4 rounded-xl cursor-pointer border transition-all ${
                       paymentMethod === "cash"
-                        ? "bg-orange-100 border-orange-400 shadow"
+                        ? "bg-orange-100 border-red-400 shadow"
                         : "bg-white hover:shadow-md border-gray-300"
                     }`}
                   >

@@ -5,7 +5,9 @@ const Product = ({ productData }) => {
     <div>
       <div>
         <div className="flex justify-between mx-[10%]">
-          <div className="text-2xl font-bold">Popular Foods</div>
+          <h1 className="text-3xl font-bold my-12 text-center text-green-600">
+            Products
+          </h1>
         </div>
 
         <div>

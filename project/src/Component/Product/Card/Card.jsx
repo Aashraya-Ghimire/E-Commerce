@@ -67,7 +67,7 @@ const Card = ({ item }) => {
 
           {/* Price + Button */}
           <div className="flex justify-between items-center mt-auto pt-3">
-            <div className="text-[#f58021] font-bold text-[15px]">
+            <div className="text-green-500 font-bold text-[15px]">
               ${item?.price}
             </div>
             <Button
@@ -79,7 +79,7 @@ const Card = ({ item }) => {
               className={`w-32 text-white text-xs font-semibold px-4 py-2 rounded-full shadow-md hover:shadow-lg transition duration-300 ${
                 cart
                   ? "bg-blue-500 hover:bg-blue-600"
-                  : "bg-gradient-to-r from-[#f58021] to-[#f56200] hover:brightness-110"
+                  : "bg-green-600 hover:brightness-110"
               }`}
             />
           </div>

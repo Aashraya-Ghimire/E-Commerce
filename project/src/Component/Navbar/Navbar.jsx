@@ -38,10 +38,10 @@ function Navbar({ data }) {
       {/* Top bar */}
       <div className="flex justify-between items-center h-[70px]">
         {/* Logo */}
-        <div className="w-16 flex-shrink-0">
+        <div className="w-20 flex-shrink-0">
           <NavLink to="/">
             <img
-              src="/logo.png"
+              src="/sportstore.png"
               alt="Logo"
               className="w-full h-auto object-contain cursor-pointer"
             />
@@ -50,7 +50,7 @@ function Navbar({ data }) {
 
         {/* Right icons */}
         <div className="flex items-center gap-4 relative">
-          <div className="hidden md:flex items-center bg-[#e6e5e5] rounded-xl px-3 py-1.5">
+          <div className="flex items-center bg-[#e6e5e5] rounded-xl px-3 py-1.5">
             <input
               type="text"
               placeholder="Search"

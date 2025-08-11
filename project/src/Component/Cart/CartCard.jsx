@@ -38,7 +38,7 @@ const CartCard = ({ item, setDta }) => {
               <Quantity item={item} quantity={item?.quantity} setDta={setDta} />
             </div>
             <div className="flex flex-col items-center justify-center gap-2">
-              <div className="text-xl font-bold text-orange-500">
+              <div className="text-xl font-bold text-green-500">
                 ${Number(item?.price || 0).toFixed(2)}
               </div>
               <button

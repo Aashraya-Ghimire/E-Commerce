@@ -9,12 +9,9 @@ import { useOutletContext } from "react-router";
 function App() {
   const mainData = useOutletContext();
   const [productData, setProductData] = useState([]);
-  useEffect(
-    () => {
-      setProductData(mainData);
-    },
-    { mainData }
-  );
+  useEffect(() => {
+    setProductData(mainData);
+  }, [mainData]);
   return (
     <div className="bg-[#F7F7F7]">
       <Navbar />

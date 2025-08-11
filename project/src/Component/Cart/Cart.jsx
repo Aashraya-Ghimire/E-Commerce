@@ -24,7 +24,7 @@ function Cart() {
         <div className="flex flex-col items-center justify-center h-[80vh] px-4 text-center animate-fadeIn">
           <div className="bg-white p-10 rounded-3xl shadow-xl max-w-md w-full">
             <div className="flex justify-center mb-6">
-              <FiShoppingCart size={80} className="text-orange-400" />
+              <FiShoppingCart size={80} className="text-red-400" />
             </div>
             <h2 className="text-3xl font-bold text-gray-800 mb-3">
               Your Cart is Empty
@@ -34,7 +34,7 @@ function Cart() {
               delicious options!
             </p>
             <NavLink to="/">
-              <button className="bg-gradient-to-r from-[#f58021] to-[#f56200] hover:opacity-90 text-white font-semibold px-6 py-3 rounded-full transition-all duration-300 shadow-md">
+              <button className="bg-green-500 hover:opacity-90 text-white font-semibold px-6 py-3 rounded-full transition-all duration-300 shadow-md">
                 Start Shopping
               </button>
             </NavLink>
@@ -49,7 +49,7 @@ function Cart() {
       <Navbar />
       <div className="flex justify-center px-4 pt-20">
         <div className="w-full max-w-4xl bg-white rounded-2xl shadow-lg overflow-hidden">
-          <div className="h-20 bg-orange-500 flex flex-col sm:flex-row justify-between items-center px-6 py-5 text-white rounded-t-2xl">
+          <div className="h-20 bg-red-500 flex flex-col sm:flex-row justify-between items-center px-6 py-5 text-white rounded-t-2xl">
             <div className="text-center sm:text-left">
               <div className="text-2xl font-bold">Your Cart</div>
               <div className="text-sm text-orange-100">Items in the cart</div>
@@ -69,7 +69,7 @@ function Cart() {
           <div className="px-6 py-5 bg-gray-50">
             <div className="flex justify-between items-center text-lg font-semibold text-gray-700 mb-4">
               <div>Total</div>
-              <div className="text-orange-500 text-xl">${totalAmount(dta)}</div>
+              <div className="text-green-500 text-xl">${totalAmount(dta)}</div>
             </div>
             <div className="flex flex-col sm:flex-row justify-between items-center gap-4 mt-4">
               <button

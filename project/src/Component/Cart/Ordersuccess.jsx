@@ -21,7 +21,7 @@ function Ordersuccess({ success, setSuccess }) {
       <div className="bg-white p-8 rounded-2xl shadow-2xl text-center max-w-sm w-full animate-fadeInScale transition-all">
         <div className="flex items-center justify-center mb-4 h-20">
           {!showCheck ? (
-            <div className="w-12 h-12 border-4 border-orange-300 border-t-orange-500 rounded-full animate-spin"></div>
+            <div className="w-12 h-12 border-4 border-red-300 border-t-red-500 rounded-full animate-spin"></div>
           ) : (
             <svg
               className="w-16 h-16 text-green-500 animate-pop"
@@ -51,7 +51,7 @@ function Ordersuccess({ success, setSuccess }) {
 
         {showCheck && (
           <button
-            className="bg-orange-500 hover:bg-orange-600 text-white font-medium px-6 py-2 rounded-xl shadow-md transition-all duration-300"
+            className="bg-red-500 hover:bg-red-600 text-white font-medium px-6 py-2 rounded-xl shadow-md transition-all duration-300"
             onClick={() => {
               setSuccess(false);
               navigate("/");

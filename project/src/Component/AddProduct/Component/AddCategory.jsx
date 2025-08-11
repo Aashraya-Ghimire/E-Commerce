@@ -17,11 +17,11 @@ const AddCategory = ({ setProductDetail, productDetail }) => {
         onChange={handleCategoryChange}
       >
         <option value="">Select Category</option>
-        <option value="Lunch">Lunch</option>
-        <option value="Dinner">Dinner</option>
-        <option value="Breakfast">Breakfast</option>
-        <option value="Snacks">Snacks</option>
-        <option value="Beverage">Beverage</option>
+        <option value="Athletics">Athletics</option>
+        <option value="Indoor">Indoor</option>
+        <option value="Outdoor">Outdoor</option>
+        <option value="Shoes">Shoes</option>
+        <option value="Sports Wear">Sports Wear</option>
       </select>
     </div>
   );

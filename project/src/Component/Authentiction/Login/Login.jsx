@@ -31,9 +31,7 @@ const Login = ({ setScreen }) => {
   return (
     <div className="p-4 sm:p-6">
       {/* Heading */}
-      <div className="text-2xl font-bold text-orange-500 text-center">
-        Login
-      </div>
+      <div className="text-2xl font-bold text-green-500 text-center">Login</div>
 
       {/* Input Fields */}
       <div className="space-y-2">

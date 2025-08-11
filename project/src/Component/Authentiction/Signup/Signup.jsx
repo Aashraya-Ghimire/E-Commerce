@@ -16,9 +16,7 @@ const Signup = ({ setScreen }) => {
   const [stage, setStage] = useState(0);
   return (
     <div className="p-4 sm:p-6">
-      <div className="text-xl font-bold text-orange-500 text-center">
-        SignUp
-      </div>
+      <div className="text-xl font-bold text-green-500 text-center">SignUp</div>
       <div className="space-y-2">
         {stage == 0 && (
           <ContactUser
