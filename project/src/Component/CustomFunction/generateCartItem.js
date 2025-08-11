@@ -3,5 +3,6 @@ const generateCartItem = (dta) => {
   dta.map((item) => {
     tempArray.push({ itemName: item.pName, quantity: item.quantity });
   });
+  return tempArray;
 };
 export default generateCartItem;

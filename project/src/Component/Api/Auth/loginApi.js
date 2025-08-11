@@ -14,7 +14,7 @@ const loginApi = async (userInfo, navigate, setErr) => {
   console.log(response);
   if (request.status == 200) {
     console.log("response", response);
-    localStorage.setItem("token", response.token);
+    localStorage.setItem("token", response.response.token);
     localStorage.setItem("userDetail", JSON.stringify(response.response));
     window.location.href = "/";
   } else {

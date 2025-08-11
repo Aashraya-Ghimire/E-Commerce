@@ -1,17 +1,27 @@
-import React from "react";
+import React, { useState } from "react";
 import { FaShoppingCart } from "react-icons/fa";
 import { MdOutlineStarPurple500 } from "react-icons/md";
 import { IoIosArrowBack } from "react-icons/io";
 import { IoStarOutline } from "react-icons/io5";
 import OrangeButton from "../../Button/OrangeButton";
 import { useNavigate } from "react-router-dom";
+import Button from "../../Button/Button";
+import addToCart from "../../Local/addToCart";
 
-function Productinfo({ data, setShowmodel }) {
+function Productinfo({ data, setShowmodel, item }) {
   const navigate = useNavigate();
   const userData = JSON.parse(localStorage.getItem("userDetail"));
+  const [cart, setCart] = useState(false);
 
   const navigateFunction = () => {
     navigate("/product", { state: data });
+  };
+
+  const handleClick = () => {
+    console.log(data);
+
+    setCart((prev) => !prev);
+    addToCart(data);
   };
 
   return (
@@ -106,13 +116,18 @@ function Productinfo({ data, setShowmodel }) {
           {userData.role == "admin" ? (
             <OrangeButton title={"Update"} onClick={() => navigateFunction()} />
           ) : (
-            <button
-              onClick={() => alert("Added to cart")}
-              className="flex items-center gap-2 bg-[#fa7516] hover:bg-[#f97216] text-white text-sm px-4 py-2 rounded-lg transition-all duration-200 shadow-md"
-            >
-              <FaShoppingCart />
-              Add to Cart
-            </button>
+            <Button
+              onClick={(e) => {
+                e.stopPropagation();
+                handleClick(item);
+              }}
+              title={cart ? "Added to cart" : "Add to cart"}
+              className={`w-32 text-white text-xs font-semibold px-4 py-2 rounded-full shadow-md hover:shadow-lg transition duration-300 ${
+                cart
+                  ? "bg-blue-500 hover:bg-blue-600"
+                  : "bg-gradient-to-r from-[#f58021] to-[#f56200] hover:brightness-110"
+              }`}
+            />
           )}
         </div>
       </div>

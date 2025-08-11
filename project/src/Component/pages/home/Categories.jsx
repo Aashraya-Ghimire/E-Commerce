@@ -1,5 +1,4 @@
-import React from "react";
-
+import React, { useEffect } from "react";
 function Categories({ maindata, setProductData }) {
   const categories = [
     { label: "All", img: "/all.jpg" },
@@ -9,6 +8,10 @@ function Categories({ maindata, setProductData }) {
     { label: "Breakfast", img: "/drinks.png" },
     { label: "Beverage", img: "/fast.png" },
   ];
+  useEffect = (setProductData) => {
+    setProductData(maindata);
+  };
+
   const sort = (name) => {
     let temp = maindata.filter(
       (item) => item.category.toLowerCase() == name.toLowerCase()

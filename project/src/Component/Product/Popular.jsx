@@ -6,7 +6,7 @@ const Popular = () => {
     <div>
       <div>
         <div className="flex justify-between mx-[10%]">
-          <div className="text-2xl font-bold">Popular Foods</div>
+          <div className="text-2xl font-bold">Menu</div>
         </div>
 
         <div className="h-80 overflow-scroll w-[50vw]">

@@ -3,9 +3,9 @@ import getOrderApi from "../../Api/Order/getOrderApi";
 import OrderCard from "./OrderCard";
 
 const Order = ({ orderData }) => {
-  useEffect(() => {
-    getOrderApi();
-  }, []);
+  // useEffect(() => {
+  //   getOrderApi();
+  // }, []);
 
   return (
     <div className="p-6 bg-gradient-to-br from-sky-100 to-white min-h-screen">

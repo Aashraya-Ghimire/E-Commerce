@@ -8,7 +8,7 @@ const OrderCard = ({ data }) => {
     <div className="bg-white w-64 p-4 rounded-xl shadow-md border border-gray-200 text-gray-700 text-sm font-medium hover:shadow-lg transition-all duration-200">
       {/* Customer Details */}
       <div className="mb-4 space-y-2">
-        <h3 className="text-base font-semibold text-sky-700 border-b pb-1 italic flex items-center gap-2">
+        <h3 className="text-base font-semibold text-sky-700 border-b pb-1 flex items-center gap-2">
           <FaUser className="text-sky-600" />
           Customer Details
         </h3>
@@ -42,26 +42,26 @@ const OrderCard = ({ data }) => {
 
       {/* Items and Total */}
       <div className="space-y-2">
-        <h3 className="text-base font-semibold text-sky-700 border-b pb-1 italic flex items-center gap-2">
-          <LuDot className="text-sky-600" />
+        <h3 className="text-base font-semibold text-sky-700 border-b pb-1 flex items-center gap-2">
           Items
         </h3>
-        <div className="flex justify-between font-semibold items-center">
-          <span className="flex items-center gap-1">
-            <FaMoneyBillWave className="text-green-500" /> Total:
-          </span>
-          <span className="text-green-600">Rs. {data.totalAmount}</span>
-        </div>
+
         <div className="divide-y">
           {data.items.map((item, index) => (
             <div key={index} className="flex justify-between items-center py-1">
               <div className="flex items-center gap-1">
-                <LuDot className="text-sky-600 text-lg" />
+                {/* <LuDot className="text-sky-600 text-lg" /> */}
                 <span>{item.itemName}</span>
               </div>
               <span className="text-xs text-gray-500">x{item.quantity}</span>
             </div>
           ))}
+        </div>
+        <div className="flex justify-between font-semibold items-center">
+          <span className="flex items-center gap-1">
+            <FaMoneyBillWave className="text-green-500" /> Total:
+          </span>
+          <span className="text-green-600">Rs. {data.totalAmount}</span>
         </div>
       </div>
     </div>

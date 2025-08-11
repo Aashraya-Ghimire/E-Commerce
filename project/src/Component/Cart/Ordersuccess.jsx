@@ -7,7 +7,7 @@ function Ordersuccess({ success, setSuccess }) {
 
   useEffect(() => {
     if (success) {
-      const timer = setTimeout(() => setShowCheck(true), 500);
+      const timer = setTimeout(() => setShowCheck(true), 2000);
       return () => clearTimeout(timer);
     } else {
       setShowCheck(false);

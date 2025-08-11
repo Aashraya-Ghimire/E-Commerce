@@ -12,6 +12,7 @@ const signupApi = async (userDetail, setStage, setUserDetail) => {
   );
   const response = await request.json();
   if (request.status == 200) {
+    response.response.token;
     localStorage.setItem("token", response.response.token);
     localStorage.setItem("userDetail", JSON.stringify(response.response));
     window.location.href = "/";

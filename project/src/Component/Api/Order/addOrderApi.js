@@ -1,7 +1,7 @@
 import SecureFetch from "../Auth/ApiConfiguration";
 import mainEndpoint from "../mainEndpoint";
 
-const addOrderApi = async (orderData, navigate) => {
+const addOrderApi = async (tempData, navigate) => {
   const request = await SecureFetch(
     mainEndpoint + "/order",
     "POST",
@@ -9,7 +9,7 @@ const addOrderApi = async (orderData, navigate) => {
       "content-type": "application/json",
       Authorization: `Bearer ${localStorage.getItem("token")}`,
     },
-    orderData
+    tempData
   );
   if (request.status == 200) {
     alert("order placed successfully");

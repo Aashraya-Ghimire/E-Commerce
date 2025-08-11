@@ -11,44 +11,17 @@ import { useNavigate } from "react-router-dom";
 import addOrderApi from "../Api/Order/addOrderApi";
 function CheckOutModal({ visible, setVisible, dta }) {
   const [success, setSuccess] = useState(false);
-
-  const [err, setErr] = useState(0);
-  const name = useRef("");
-  const phone = useRef("");
-  const address = useRef("");
-  const emailaddress = useRef("");
   const [paymentMethod, setPaymentMethod] = useState("cash");
 
-  // const handleProcess = () => {
-  //   if (name.current?.value.trim().length < 3) {
-  //     setErr(1);
-  //   } else if (
-  //     !phone.current?.value ||
-  //     !/^\d+$/.test(phone.current.value) ||
-  //     phone.current.value.length < 8 ||
-  //     phone.current.value.length > 10 ||
-  //     phone.current.value.length === 9
-  //   ) {
-  //     setErr(2);
-  //   } else if (address.current?.value.trim() === "") {
-  //     setErr(3);
-  //   } else if (
-  //     emailaddress.current?.value.trim() === "" ||
-  //     !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(emailaddress.current.value.trim())
-  //   ) {
-  //     setErr(4);
-  //   } else {
-  //     setErr(0);
-  //     setSuccess(true);
-  //     localStorage.removeItem("cart");
-  //   }
-  // };
   const navigate = useNavigate();
   const handleOrder = () => {
+    // setErr(0);
+    setSuccess(true);
     const tempData = {
       totalAmount: totalAmount(dta),
       items: generateCartItem(dta),
     };
+    console.log("sdgshsfd", tempData);
     addOrderApi(tempData, navigate);
   };
 
@@ -86,39 +59,6 @@ function CheckOutModal({ visible, setVisible, dta }) {
           <div className="flex flex-grow flex-wrap lg:flex-nowrap overflow-y-auto">
             {/* Left: User Details */}
             <div className="w-full lg:w-12/9 overflow-y-auto bg-gray-50 border-r border-gray-200 p-6 space-y-6">
-              {/* User Details Card */}
-              <div className="bg-white rounded-xl shadow-md p-4">
-                <h3 className="text-2xl font-semibold text-gray-800 text-center">
-                  User Details
-                </h3>
-                <div className="grid grid-cols-1 sm:grid-cols-2 gap-x-4">
-                  <TextInput
-                    label="Name"
-                    placeholder="Enter your name"
-                    ref={name}
-                    err={err === 1}
-                  />
-                  <TextInput
-                    label="Phone"
-                    placeholder="Enter your phone number"
-                    ref={phone}
-                    err={err === 2}
-                  />
-                  <TextInput
-                    label="Address"
-                    placeholder="Enter your address"
-                    ref={address}
-                    err={err === 3}
-                  />
-                  <TextInput
-                    label="Email Address"
-                    placeholder="Enter your email"
-                    ref={emailaddress}
-                    err={err === 4}
-                  />
-                </div>
-              </div>
-
               {/* Payment Method Card */}
               <div className="bg-white rounded-xl shadow-md px-6 p-4">
                 <h4 className="text-xl font-semibold text-gray-800 mb-4">
@@ -208,9 +148,6 @@ function CheckOutModal({ visible, setVisible, dta }) {
                     <span>${totalAmount(dta)}</span>
                   </div>
                 </div>
-                {/* <div className="pt-2 flex justify-center">
-                  <OrangeButton title="Process Order" onClick={handleProcess} />
-                </div> */}
                 <div className="pt-2 flex justify-center">
                   <OrangeButton
                     title="Process checkout"
