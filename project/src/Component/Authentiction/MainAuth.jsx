@@ -6,7 +6,7 @@ function MainAuth() {
   const [screen, setScreen] = useState(true);
 
   return (
-    <div className="relative min-h-screen bg-center bg-cover bg-no-repeat bg-[url('/ecom.png')] px-4">
+    <div className="relative min-h-screen bg-center bg-cover bg-no-repeat bg-[url('/bg.png')] px-4">
       {/* Dark blur overlay */}
       <div className="absolute inset-0 bg-black/60 backdrop-blur-sm z-0" />
 
