@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { IoIosArrowDropleft, IoIosArrowDropright } from "react-icons/io";
 
 function Categories({ maindata, setProductData }) {
@@ -11,8 +11,25 @@ function Categories({ maindata, setProductData }) {
     { label: "Sports Wear", img: "/clothes.jpg" },
   ];
 
-  const visibleCount = 4;
   const [startIndex, setStartIndex] = useState(0);
+  const [visibleCount, setVisibleCount] = useState(4);
+
+  // Update visibleCount based on screen size
+  useEffect(() => {
+    const updateVisibleCount = () => {
+      if (window.innerWidth < 640) {
+        setVisibleCount(2); // mobile
+      } else if (window.innerWidth < 1024) {
+        setVisibleCount(3); // tablet
+      } else {
+        setVisibleCount(4); // desktop
+      }
+    };
+
+    updateVisibleCount(); // run on mount
+    window.addEventListener("resize", updateVisibleCount);
+    return () => window.removeEventListener("resize", updateVisibleCount);
+  }, []);
 
   const scrollLeft = () => {
     setStartIndex((prev) => Math.max(prev - 1, 0));
@@ -41,12 +58,12 @@ function Categories({ maindata, setProductData }) {
   );
 
   return (
-    <div className=" mx-auto my-5 w-full box-border px-4 sm:px-6 lg:px-12">
+    <div className="mx-auto my-5 w-full box-border px-4 sm:px-6 lg:px-12">
       <h2 className="text-2xl sm:text-3xl font-bold my-8 sm:my-12 text-center text-green-600">
         Product Category
       </h2>
 
-      <div className="flex items-center justifu-center gap-20 justify-center">
+      <div className="flex items-center gap-4 sm:gap-8 lg:gap-20 justify-center">
         {/* Left arrow */}
         <button
           onClick={scrollLeft}
@@ -57,11 +74,16 @@ function Categories({ maindata, setProductData }) {
               : "opacity-40 bg-gray-200 cursor-not-allowed"
           }`}
         >
-          <IoIosArrowDropleft className="text-4xl text-red-400" />
+          <IoIosArrowDropleft className="text-3xl sm:text-4xl text-red-400" />
         </button>
 
         {/* Visible categories */}
-        <div className="grid grid-cols-4 gap-4 flex-1">
+        <div
+          className={`grid gap-4 flex-1`}
+          style={{
+            gridTemplateColumns: `repeat(${visibleCount}, minmax(0, 1fr))`,
+          }}
+        >
           {visibleCategories.map((cat, i) => (
             <div
               key={i}
@@ -71,9 +93,8 @@ function Categories({ maindata, setProductData }) {
               <img
                 src={cat.img}
                 alt={cat.label}
-                className="w-40 h-40 rounded-2xl object-cover hover:shadow-lg hover:shadow-gray-400 transition-all duration-300"
+                className="w-28 h-28 sm:w-40 sm:h-40 rounded-2xl object-cover hover:shadow-lg hover:shadow-gray-400 transition-all duration-300"
               />
-
               <div className="text-center mt-2 text-sm sm:text-lg font-medium">
                 {cat.label}
               </div>
@@ -91,7 +112,7 @@ function Categories({ maindata, setProductData }) {
               : "opacity-40 bg-gray-200 cursor-not-allowed"
           }`}
         >
-          <IoIosArrowDropright className="text-4xl text-red-400" />
+          <IoIosArrowDropright className="text-3xl sm:text-4xl text-red-400" />
         </button>
       </div>
 

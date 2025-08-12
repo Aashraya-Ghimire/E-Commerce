@@ -34,7 +34,7 @@ function Hero() {
         </p>
 
         <button className="w-fit bg-green-600 text-white font-bold px-8 py-3 rounded-full shadow-lg hover:scale-105 hover:shadow-xl transition duration-300">
-          View Menu
+          View Products
         </button>
       </div>
     </div>
