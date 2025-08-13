@@ -15,12 +15,11 @@ function CheckOutModal({ visible, setVisible, dta }) {
 
   const navigate = useNavigate();
   const handleOrder = () => {
-    setSuccess(true);
+    // setSuccess(true);
     const tempData = {
       totalAmount: totalAmount(dta),
       items: generateCartItem(dta),
     };
-    console.log("sdgshsfd", tempData);
     addOrderApi(tempData, navigate);
   };
 
@@ -117,7 +116,7 @@ function CheckOutModal({ visible, setVisible, dta }) {
                   Order Summary
                 </h3>
 
-                <div className="text-sm text-gray-500 font-semibold flex justify-between border-b pb-2">
+                <div className="text-sm text-gray-500 font-semibold flex justify-between border-b pb-2 px-4">
                   <span className="w-1/2">Item</span>
                   <span className="w-2/4 text-center">Qty</span>
                   <span className="w-1/4 text-right">Price</span>
@@ -142,7 +141,7 @@ function CheckOutModal({ visible, setVisible, dta }) {
                   ))}
                 </div>
                 <div className="border-t pt-3">
-                  <div className="flex justify-between text-lg font-bold text-gray-800">
+                  <div className="flex justify-between text-lg font-bold text-gray-800 px-4">
                     <span>Total:</span>
                     <span>Rs {totalAmount(dta)}</span>
                   </div>

@@ -11,11 +11,24 @@ import CheckOutModal from "./CheckOutModal";
 function Cart() {
   const [visible, setVisible] = useState(false);
   const [dta, setDta] = useState([]);
+  const [selected, setSelected] = useState([]); // selected items
 
+  // Load cart from localStorage
   useEffect(() => {
     const data = JSON.parse(localStorage.getItem("cart")) || [];
     setDta(data);
   }, []);
+
+  // Handle "Select All" checkbox
+  const handleSelectAll = (e) => {
+    if (e.target.checked) {
+      // Only select items with stock > 0
+      const inStockItems = dta.filter((item) => item.stock > 0);
+      setSelected([...inStockItems]);
+    } else {
+      setSelected([]);
+    }
+  };
 
   if (!dta || dta.length === 0) {
     return (
@@ -45,10 +58,11 @@ function Cart() {
   }
 
   return (
-    <div className="bg-gray-100 h-[100vh]">
+    <div className="bg-gray-100 min-h-screen">
       <Navbar />
       <div className="flex justify-center px-4 pt-20">
         <div className="w-full max-w-4xl bg-white rounded-2xl shadow-lg overflow-hidden">
+          {/* Header */}
           <div className="h-20 bg-red-500 flex flex-col sm:flex-row justify-between items-center px-6 py-5 text-white rounded-t-2xl">
             <div className="text-center sm:text-left">
               <div className="text-2xl font-bold">Your Cart</div>
@@ -61,40 +75,69 @@ function Cart() {
               Continue Shopping
             </NavLink>
           </div>
+
+          {/* Select All */}
+          <div className="px-6 py-3 flex items-center border-b border-gray-200">
+            <input
+              type="checkbox"
+              className="w-5 h-5 accent-green-500 mr-2"
+              checked={selected.length == dta.length && dta.length > 0}
+              onChange={handleSelectAll}
+            />
+            <label className="font-semibold text-gray-700">Select All</label>
+          </div>
+
+          {/* Cart Items */}
           <div className="max-h-[55vh] overflow-y-auto">
-            {dta.map((item, index) => (
-              <CartCard item={item} key={index} setDta={setDta} />
+            {dta.map((item) => (
+              <CartCard
+                key={item._id}
+                item={item}
+                setDta={setDta}
+                selected={selected} // selected array
+                setSelected={setSelected} // setter
+              />
             ))}
           </div>
+
+          {/* Total & Actions */}
           <div className="px-6 py-5 bg-gray-50">
             <div className="flex justify-between items-center text-lg font-semibold text-gray-700 mb-4">
               <div>Total</div>
               <div className="text-green-500 text-xl">
-                Rs {totalAmount(dta)}
+                Rs {totalAmount(selected)}
               </div>
             </div>
             <div className="flex flex-col sm:flex-row justify-between items-center gap-4 mt-4">
+              {/* Clear Cart */}
               <button
                 onClick={() => {
                   localStorage.removeItem("cart");
                   setDta([]);
+                  setSelected([]);
                 }}
                 className="flex items-center justify-center w-full sm:w-auto gap-2 px-6 py-3 bg-white border border-gray-300 text-gray-700 font-medium rounded-full shadow hover:bg-gray-100 transition duration-300"
               >
                 <MdDeleteOutline className="text-xl" />
                 Clear Cart
               </button>
+
+              {/* Checkout Button */}
               <OrangeButton
                 title="Checkout"
                 onClick={() => {
-                  setVisible(true);
+                  if (totalAmount(selected) > 0) {
+                    setVisible(true);
+                  }
                 }}
               />
             </div>
           </div>
         </div>
       </div>
-      <CheckOutModal visible={visible} setVisible={setVisible} dta={dta} />
+
+      {/* Checkout Modal */}
+      <CheckOutModal visible={visible} setVisible={setVisible} dta={selected} />
     </div>
   );
 }

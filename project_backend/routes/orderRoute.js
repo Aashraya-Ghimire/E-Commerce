@@ -3,6 +3,7 @@ const route = express.Router();
 const Order = require("../model/orderModel");
 const { jwtAuthMiddleWare, generateJwtToken } = require("../jwt");
 const User = require("../model/userModel");
+const Product = require("../model/productModel");
 
 route.get("/", async (req, res) => {
   try {
@@ -26,6 +27,23 @@ route.post("/", jwtAuthMiddleWare, async (req, res) => {
     data.city = user.city;
     data.street = user.street;
     data.deliveryDescription = user.deliveryDescription;
+
+    const { items } = req.body;
+    for (const element of items) {
+      const product = await Product.findById(element.id);
+      if (!product) {
+        return res
+          .status(404)
+          .json({ message: `Product ${element.id} not found` });
+      }
+      if (product.stock < element.quantity) {
+        return res
+          .status(400)
+          .json({ message: `not enough stock for ${product.productName}` });
+      }
+      product.stock -= element.quantity;
+      await product.save();
+    }
     const order = new Order(data);
     const response = await order.save();
     res
