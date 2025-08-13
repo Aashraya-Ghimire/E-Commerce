@@ -15,7 +15,6 @@ function CheckOutModal({ visible, setVisible, dta }) {
 
   const navigate = useNavigate();
   const handleOrder = () => {
-    // setErr(0);
     setSuccess(true);
     const tempData = {
       totalAmount: totalAmount(dta),
@@ -137,7 +136,7 @@ function CheckOutModal({ visible, setVisible, dta }) {
                         x{item.quantity}
                       </span>
                       <span className="w-1/4 text-right font-semibold">
-                        ${item.price}
+                        Rs {item.price}
                       </span>
                     </div>
                   ))}
@@ -145,13 +144,15 @@ function CheckOutModal({ visible, setVisible, dta }) {
                 <div className="border-t pt-3">
                   <div className="flex justify-between text-lg font-bold text-gray-800">
                     <span>Total:</span>
-                    <span>${totalAmount(dta)}</span>
+                    <span>Rs {totalAmount(dta)}</span>
                   </div>
                 </div>
                 <div className="pt-2 flex justify-center">
                   <OrangeButton
                     title="Process checkout"
-                    onClick={handleOrder}
+                    onClick={() => {
+                      handleOrder();
+                    }}
                   />
                 </div>
                 {success && (

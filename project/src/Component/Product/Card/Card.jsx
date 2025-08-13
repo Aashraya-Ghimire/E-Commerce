@@ -25,6 +25,10 @@ const Card = ({ item }) => {
         onClick={() => setShowModal(true)}
         className="w-72 h-[300px] rounded-3xl shadow-xl bg-white bg-opacity-80 backdrop-blur-md border border-gray-100 hover:shadow-2xl transition-transform duration-300 transform hover:scale-[1.025] cursor-pointer flex flex-col overflow-hidden relative"
       >
+        <div className="absolute top-3 left-3 px-3 py-1 bg-green-500 text-white text-xs z-1 font-semibold rounded-full shadow-md flex items-center justify-center">
+          {item?.stock} in stock
+        </div>
+
         {userData.role == "admin" && (
           <div
             className="w-[25px] h-[25px] bg-red-500 rounded-2xl absolute z-1 flex justify-center items-center top-2 right-2"
@@ -68,8 +72,9 @@ const Card = ({ item }) => {
           {/* Price + Button */}
           <div className="flex justify-between items-center mt-auto pt-3">
             <div className="text-green-500 font-bold text-[15px]">
-              ${item?.price}
+              Rs {item?.price}
             </div>
+
             <Button
               onClick={(e) => {
                 e.stopPropagation();

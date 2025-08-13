@@ -69,7 +69,9 @@ function Cart() {
           <div className="px-6 py-5 bg-gray-50">
             <div className="flex justify-between items-center text-lg font-semibold text-gray-700 mb-4">
               <div>Total</div>
-              <div className="text-green-500 text-xl">${totalAmount(dta)}</div>
+              <div className="text-green-500 text-xl">
+                Rs {totalAmount(dta)}
+              </div>
             </div>
             <div className="flex flex-col sm:flex-row justify-between items-center gap-4 mt-4">
               <button
@@ -82,7 +84,12 @@ function Cart() {
                 <MdDeleteOutline className="text-xl" />
                 Clear Cart
               </button>
-              <OrangeButton title="Checkout" onClick={() => setVisible(true)} />
+              <OrangeButton
+                title="Checkout"
+                onClick={() => {
+                  setVisible(true);
+                }}
+              />
             </div>
           </div>
         </div>

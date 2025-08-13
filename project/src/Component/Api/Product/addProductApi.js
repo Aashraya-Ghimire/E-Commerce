@@ -21,6 +21,7 @@ const addProductApi = async (productDetail, setProductDetail) => {
       rating: 0,
       caterory: "",
       description: "",
+      stoke: 0,
     });
   }
 };

@@ -4,6 +4,7 @@ import { IoStarOutline } from "react-icons/io5";
 import { FiTrash2 } from "react-icons/fi";
 import removeFromCart from "../Local/removeFromCart";
 import Quantity from "./Quantity";
+import { FaBoxes } from "react-icons/fa";
 
 const CartCard = ({ item, setDta }) => {
   const starsFilled = Math.floor(item?.rating || 0);
@@ -19,7 +20,7 @@ const CartCard = ({ item, setDta }) => {
               className="w-full h-full object-cover"
             />
           </div>
-          <div className="flex-1 grid sm:grid-cols-4 gap-4 w-full items-center">
+          <div className="flex-1 grid sm:grid-cols-5 gap-4 w-full items-center">
             <div className="col-span-2">
               <h2 className="text-lg font-bold text-gray-800 truncate">
                 {item?.pName}
@@ -37,9 +38,15 @@ const CartCard = ({ item, setDta }) => {
             <div>
               <Quantity item={item} quantity={item?.quantity} setDta={setDta} />
             </div>
+            {/* Stock Badge */}
+            <div className="flex items-center gap-1 px-3 py-1 bg-green-100 text-green-700 text-xs font-semibold rounded-full shadow-sm justify-center">
+              <FaBoxes className="text-green-500 text-sm" />
+              {item?.stock} in stock
+            </div>
+
             <div className="flex flex-col items-center justify-center gap-2">
               <div className="text-xl font-bold text-green-500">
-                ${Number(item?.price || 0).toFixed(2)}
+                Rs {Number(item?.price || 0).toFixed(2)}
               </div>
               <button
                 onClick={() => removeFromCart(item, setDta)}

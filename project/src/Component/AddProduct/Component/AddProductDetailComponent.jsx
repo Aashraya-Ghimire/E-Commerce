@@ -36,11 +36,20 @@ const AddProductDetailComponent = ({ setProductDetail, productDetail }) => {
         />
       </div>
 
-      {/* Category Selector */}
-      <AddCategory
-        setProductDetail={setProductDetail}
-        productDetail={productDetail}
-      />
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+        {/* Category Selector */}
+        <AddCategory
+          setProductDetail={setProductDetail}
+          productDetail={productDetail}
+        />
+
+        <ProductInputField
+          setProductDetail={setProductDetail}
+          label="Stock"
+          name="stock"
+          productDetail={productDetail}
+        />
+      </div>
 
       {/* Description */}
       <ProductInputField

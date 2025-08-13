@@ -26,6 +26,10 @@ const productSchema = new mongoose.Schema({
   category: {
     type: String,
   },
+  stock: {
+    type: String,
+    default: 0,
+  },
 });
 
 const Product = mongoose.model("Product", productSchema);

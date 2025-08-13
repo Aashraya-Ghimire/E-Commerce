@@ -24,13 +24,13 @@ const AddProduct = () => {
     rating: 0,
     category: "",
     description: "",
+    stock: 0,
   };
 
   const [productDetail, setProductDetail] = useState(data ? data : temp);
 
   const handleProduct = async () => {
     await addProductApi(productDetail, setProductDetail);
-    alert("product added successfully");
   };
   const handleUpdateProduct = () => {
     const tempData = productDetail;

@@ -1,5 +1,6 @@
 import React, { useState } from "react";
-import { FaShoppingCart } from "react-icons/fa";
+// import { FaShoppingCart } from "react-icons/fa";
+import { FaBoxes } from "react-icons/fa";
 import { MdOutlineStarPurple500 } from "react-icons/md";
 import { IoIosArrowBack } from "react-icons/io";
 import { IoStarOutline } from "react-icons/io5";
@@ -109,9 +110,18 @@ function Productinfo({ data, setShowmodel, item }) {
 
         {/* Price & Button */}
         <div className="flex flex-col sm:flex-row justify-between items-center gap-3 mt-4">
-          <span className="text-lg sm:text-xl font-semibold text-green-400">
-            ${data?.price}
+          {/* Price */}
+          <span className="text-lg sm:text-xl font-semibold text-green-600">
+            Rs {data?.price}
           </span>
+
+          {/* Stock Badge */}
+          <span className="flex items-center gap-1 px-3 py-1 bg-gradient-to-r from-green-500 to-emerald-500 text-white text-xs font-semibold rounded-full shadow-md border border-white/20">
+            <FaBoxes className="text-sm" />
+            {data?.stock} in stock
+          </span>
+
+          {/* Button */}
           {userData.role === "admin" ? (
             <OrangeButton title={"Update"} onClick={navigateFunction} />
           ) : (
