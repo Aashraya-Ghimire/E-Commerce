@@ -5,15 +5,17 @@ import addToCart from "../../Local/addToCart";
 import Productinfo from "../Modal/Productinfo";
 import deleteProductApi from "../../Api/Product/deleteProductApi";
 import { IoStarOutline } from "react-icons/io5";
+import OutofStockModel from "../Modal/OutofStockModel";
 
 const Card = ({ item }) => {
   const userData = JSON.parse(localStorage.getItem("userDetail"));
   const [showModal, setShowModal] = useState(false);
   const [cart, setCart] = useState(false);
-
+  const [stockModel, setStockModel] = useState(false);
   const handleClick = (item) => {
     setCart((prev) => !prev);
     if (!cart) addToCart(item);
+    if (item.stock == 0) setStockModel(true);
   };
 
   const handleDelete = () => {
@@ -97,6 +99,13 @@ const Card = ({ item }) => {
         <div className="fixed inset-0 z-50 bg-black/30 backdrop-blur-sm flex items-center justify-center px-4 py-8">
           <Productinfo data={item} setShowmodel={setShowModal} />
         </div>
+      )}
+
+      {stockModel && (
+        <OutofStockModel
+          stockModel={stockModel}
+          onClose={() => setStockModel(false)}
+        />
       )}
     </div>
   );

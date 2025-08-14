@@ -1,18 +1,41 @@
 import React from "react";
-import { RiDashboardFill } from "react-icons/ri";
+import {
+  RiDashboardFill,
+  RiShoppingCart2Line,
+  RiAddCircleLine,
+} from "react-icons/ri";
 import { useNavigate } from "react-router";
 
 const DashNav = ({ activeScreen, setActiveScreen }) => {
   const navigate = useNavigate();
 
   const navItemStyle = (isActive) =>
-    `flex items-center gap-3 rounded-lg cursor-pointer transition-all duration-200 
+    `flex items-center justify-center md:justify-start gap-2 rounded-lg cursor-pointer transition-all duration-200 
     ${
       isActive
         ? "bg-orange-500 shadow-lg shadow-orange-200 text-white"
         : "bg-orange-100 text-orange-800 hover:bg-orange-200"
     } 
-    hover:scale-[1.05] focus:outline-none focus:ring-2 focus:ring-orange-400`;
+    hover:scale-105 focus:outline-none focus:ring-2 focus:ring-orange-400`;
+
+  const navItems = [
+    {
+      id: 1,
+      label: "Dashboard",
+      icon: <RiDashboardFill className="text-xl" />,
+    },
+    {
+      id: 2,
+      label: "Orders",
+      icon: <RiShoppingCart2Line className="text-xl" />,
+    },
+    {
+      id: 3,
+      label: "Add Product",
+      icon: <RiAddCircleLine className="text-xl" />,
+      navigateTo: "/product",
+    },
+  ];
 
   return (
     <nav
@@ -28,45 +51,28 @@ const DashNav = ({ activeScreen, setActiveScreen }) => {
       role="navigation"
       aria-label="Dashboard Navigation"
     >
-      {/* Dashboard */}
-      <button
-        type="button"
-        className={`${navItemStyle(activeScreen === 1)} 
-          md:flex-row flex-col md:p-3 p-1 md:w-full w-auto`}
-        onClick={() => setActiveScreen(1)}
-        aria-current={activeScreen === 1 ? "page" : undefined}
-      >
-        <RiDashboardFill className="text-xl" />
-        <span className="hidden md:inline font-semibold text-base">
-          Dashboard
-        </span>
-      </button>
-
-      {/* Order */}
-      <button
-        type="button"
-        className={`${navItemStyle(activeScreen === 2)} 
-          md:flex-row flex-col md:p-3 p-1 md:w-full w-auto`}
-        onClick={() => setActiveScreen(2)}
-        aria-current={activeScreen === 2 ? "page" : undefined}
-      >
-        <RiDashboardFill className="text-xl" />
-        <span className="hidden md:inline font-semibold text-base">Order</span>
-      </button>
-
-      {/* Add Product */}
-      <button
-        type="button"
-        className={`${navItemStyle(activeScreen === 3)} 
-          md:flex-row flex-col md:p-3 p-1 md:w-full w-auto`}
-        onClick={() => navigate("/product")}
-        aria-current={activeScreen === 3 ? "page" : undefined}
-      >
-        <RiDashboardFill className="text-xl" />
-        <span className="hidden md:inline font-semibold text-base">
-          Add Product
-        </span>
-      </button>
+      {navItems.map((item) => (
+        <button
+          key={item.id}
+          type="button"
+          className={`${navItemStyle(activeScreen === item.id)} 
+            flex flex-col md:flex-row md:p-3 p-2 md:w-full w-auto`}
+          onClick={() => {
+            if (item.navigateTo) {
+              navigate(item.navigateTo);
+            } else {
+              setActiveScreen(item.id);
+            }
+          }}
+          aria-current={activeScreen === item.id ? "page" : undefined}
+        >
+          {item.icon}
+          {/* Show label only on desktop */}
+          <span className="hidden md:inline font-semibold text-base">
+            {item.label}
+          </span>
+        </button>
+      ))}
     </nav>
   );
 };
