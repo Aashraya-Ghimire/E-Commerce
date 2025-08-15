@@ -1,34 +1,42 @@
-import React from "react";
+import React, { useState } from "react";
 import { MdOutlineStarPurple500 } from "react-icons/md";
 import { IoStarOutline } from "react-icons/io5";
 import { FiTrash2 } from "react-icons/fi";
-import { FaBoxes } from "react-icons/fa";
 import removeFromCart from "../Local/removeFromCart";
 import Quantity from "./Quantity";
+import OutofStockModel from "../Product/Modal/OutofStockModel";
 
 const CartCard = ({ item, setDta, setSelected, selected }) => {
   const starsFilled = Math.floor(item?.rating || 0);
   const starsEmpty = 5 - starsFilled;
 
+  const handleCheckboxChange = (e) => {
+    if (e.target.checked) {
+      setSelected([...selected, item]);
+    } else {
+      setSelected(selected.filter((i) => i._id != item._id));
+    }
+  };
+
   return (
     <div className="flex justify-center items-center px-2 py-2 bg-gray-100">
-      <div className="w-full max-w-4xl bg-white rounded-2xl shadow-md p-3 transition hover:shadow-lg">
+      <div
+        className={`w-full max-w-4xl bg-white rounded-2xl shadow-md p-3 transition ${
+          item.stock == 0 ? "opacity-60 cursor-not-allowed" : "hover:shadow-lg"
+        }`}
+      >
         {/* Main Grid */}
         <div className="grid grid-cols-12 gap-3 items-center">
           {/* Checkbox */}
           <div className="col-span-1 flex justify-center">
             <input
               type="checkbox"
-              className="w-5 h-5 accent-green-500"
-              checked={selected?.some((i) => i._id === item._id) || false}
-              disabled={item.stock === 0}
-              onChange={(e) => {
-                if (e.target.checked) {
-                  setSelected([...selected, item]);
-                } else {
-                  setSelected(selected.filter((i) => i._id !== item._id));
-                }
-              }}
+              className="w-5 h-5 accent-green-500 disabled:opacity-50 disabled:cursor-not-allowed"
+              checked={
+                item.stock > 0 && selected?.some((i) => i._id === item._id)
+              }
+              disabled={item.stock == 0}
+              onChange={handleCheckboxChange}
             />
           </div>
 
@@ -57,15 +65,19 @@ const CartCard = ({ item, setDta, setSelected, selected }) => {
                 ))}
               </div>
               <div className="h-fit flex items-center justify-center gap-1 px-3 py-1 bg-green-100 text-green-700 text-xs font-semibold rounded-full shadow-sm">
-                {/* <FaBoxes className="text-green-500 text-8" /> */}
-                {item?.stock === 0 ? "Out of Stock" : `Stock: ${item?.stock}`}
+                {item?.stock == 0 ? "Out of Stock" : `Stock: ${item?.stock}`}
               </div>
             </div>
           </div>
 
           {/* Quantity */}
           <div className="col-span-2 flex justify-center">
-            <Quantity item={item} quantity={item?.quantity} setDta={setDta} />
+            <Quantity
+              item={item}
+              quantity={item?.quantity}
+              setDta={setDta}
+              disabled={item.stock == 0} // Disable quantity change
+            />
           </div>
 
           {/* Price & Remove */}
