@@ -5,8 +5,9 @@ import { NavLink, useNavigate } from "react-router";
 import { MdOutlineSettings, MdDashboardCustomize } from "react-icons/md";
 import SearchBar from "./SearchBar";
 
-function Navbar({ data, setProductData }) {
+function Navbar({ setProductData, maindata }) {
   const navigate = useNavigate();
+  const data = JSON.parse(localStorage.getItem("userDetails"));
   const userData = JSON.parse(localStorage.getItem("userDetail"));
 
   // State for cart count
@@ -52,7 +53,7 @@ function Navbar({ data, setProductData }) {
         {/* Right icons */}
         <div className="flex items-center gap-4 relative">
           <div>
-            <SearchBar data={data} setProductData={setProductData} />
+            <SearchBar setProductData={setProductData} maindata={maindata} />
           </div>
 
           {userData.role === "admin" ? (

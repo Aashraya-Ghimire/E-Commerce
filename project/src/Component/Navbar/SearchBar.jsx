@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { IoIosSearch } from "react-icons/io";
-import { useLocation } from "react-router";
+import { useLocation, useOutletContext } from "react-router";
 
 const SearchBar = ({ setProductData, maindata }) => {
   const location = useLocation();
@@ -17,11 +17,11 @@ const SearchBar = ({ setProductData, maindata }) => {
     const pathsToIgnore = ["/cart", "/setting", "/addProduct", "/dashboard"];
 
     if (!pathsToIgnore.includes(location.pathname) && Array.isArray(maindata)) {
-      let temp = maindata.filter((dta) => {
-        dta.pName.toLowerCase().includes(search.toLowerCase()) ||
-          dta.category.toLowerCase().includes(search.toLowerCase());
-      });
-
+      const temp = maindata.filter(
+        (dta) =>
+          dta.pName?.toLowerCase().includes(search.toLowerCase()) ||
+          dta.category?.toLowerCase().includes(search.toLowerCase())
+      );
       setProductData(temp);
     }
   }, [search, location.pathname, maindata, setProductData]);
