@@ -3,8 +3,9 @@ import { GrSearch } from "react-icons/gr";
 import { FaCartShopping } from "react-icons/fa6";
 import { NavLink, useNavigate } from "react-router";
 import { MdOutlineSettings, MdDashboardCustomize } from "react-icons/md";
+import SearchBar from "./SearchBar";
 
-function Navbar({ data }) {
+function Navbar({ data, setProductData }) {
   const navigate = useNavigate();
   const userData = JSON.parse(localStorage.getItem("userDetail"));
 
@@ -50,15 +51,8 @@ function Navbar({ data }) {
 
         {/* Right icons */}
         <div className="flex items-center gap-4 relative">
-          <div className="flex items-center bg-[#e6e5e5] rounded-xl px-3 py-1.5">
-            <input
-              type="text"
-              placeholder="Search"
-              className="outline-none bg-transparent text-sm placeholder-gray-600 w-32"
-            />
-            <button className="pl-2 text-gray-700 hover:text-black">
-              <GrSearch size={18} />
-            </button>
+          <div>
+            <SearchBar data={data} setProductData={setProductData} />
           </div>
 
           {userData.role === "admin" ? (
