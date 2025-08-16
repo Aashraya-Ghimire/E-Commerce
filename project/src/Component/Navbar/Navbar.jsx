@@ -36,7 +36,7 @@ function Navbar({ setProductData, maindata }) {
   }, []);
 
   return (
-    <div className="w-full shadow-md px-4 sm:px-6 md:px-12 bg-white z-50 fixed top-0">
+    <div className="w-full shadow-md px-2 sm:px-2 md:px-4 bg-white z-50 fixed top-0">
       {/* Top bar */}
       <div className="flex justify-between items-center h-[70px]">
         {/* Logo */}

@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { IoIosSearch } from "react-icons/io";
-import { useLocation, useOutletContext } from "react-router";
+import { useLocation } from "react-router";
 
 const SearchBar = ({ setProductData, maindata }) => {
   const location = useLocation();
@@ -27,17 +27,17 @@ const SearchBar = ({ setProductData, maindata }) => {
   }, [search, location.pathname, maindata, setProductData]);
 
   return (
-    <div>
-      <div className="flex items-center bg-gray-100 rounded-2xl text-black h-10 w-60 justify-between px-2">
+    <div className="w-full flex justify-center px-2 sm:px-4">
+      <div className="flex items-center bg-gray-100 rounded-2xl text-black h-10 w-full max-w-xs sm:max-w-sm md:max-w-md lg:max-w-lg px-2">
         <input
           type="text"
-          className="text-[15px] outline-none bg-transparent w-full px-2"
+          className="text-sm sm:text-base outline-none bg-transparent w-full px-2"
           placeholder="Search here"
           value={search}
           onClick={handleSearch}
           onChange={(e) => setSearch(e.target.value)}
         />
-        <IoIosSearch className="text-xl" />
+        <IoIosSearch className="text-lg sm:text-xl" />
       </div>
     </div>
   );
