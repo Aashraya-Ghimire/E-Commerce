@@ -54,7 +54,12 @@ const CartCard = ({ item, setDta, setSelected, selected }) => {
             <h2 className="text-base font-bold text-gray-800 truncate">
               {item?.pName}
             </h2>
-            <p className="text-xs text-gray-500">{item?.mealtype}</p>
+            <div className="flex gap-2">
+              <p className="text-xs text-gray-500">{item?.category}</p>
+            </div>
+            <div className="h-fit w-fit flex items-center justify-center gap-1 px-3 py-1 bg-green-100 text-green-700 text-xs font-semibold rounded-full shadow-sm">
+              {item?.stock == 0 ? "Out of Stock" : `Stock: ${item?.stock}`}
+            </div>
             <div className="flex justify-start items-center mt-1 gap-2">
               <div className="flex text-yellow-400">
                 {[...Array(starsFilled)].map((_, i) => (
@@ -63,9 +68,6 @@ const CartCard = ({ item, setDta, setSelected, selected }) => {
                 {[...Array(starsEmpty)].map((_, i) => (
                   <IoStarOutline key={`empty-${i}`} />
                 ))}
-              </div>
-              <div className="h-fit flex items-center justify-center gap-1 px-3 py-1 bg-green-100 text-green-700 text-xs font-semibold rounded-full shadow-sm">
-                {item?.stock == 0 ? "Out of Stock" : `Stock: ${item?.stock}`}
               </div>
             </div>
           </div>
