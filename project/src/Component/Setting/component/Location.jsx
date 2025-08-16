@@ -42,7 +42,7 @@ const Location = () => {
       <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
         {/* Form Section */}
         <div className="space-y-4 px-3">
-          <div className="text-2xl font-bold text-gray-800 italic border-b pb-2 border-orange-400">
+          <div className="text-2xl font-bold text-gray-800 border-b pb-2 border-orange-400">
             Delivery Information
           </div>
 
@@ -80,7 +80,7 @@ const Location = () => {
 
         {/* Info Section */}
         <div className="hidden md:flex flex-col justify-center gap-4 px-4">
-          <div className="text-orange-600 font-bold text-xl italic text-center">
+          <div className="text-orange-600 font-bold text-xl text-center">
             Why it matters?
           </div>
           <p className="text-gray-600 text-lg leading-relaxed text-justify">

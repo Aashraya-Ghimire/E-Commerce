@@ -3,6 +3,7 @@ import DashNav from "./component/DashNav";
 import Dashboard from "./component/Dashboard";
 import Order from "./component/Order";
 import getOrderApi from "../Api/Order/getOrderApi";
+import Navbar from "../Navbar/Navbar";
 import { useOutletContext } from "react-router";
 
 const DashboardMain = () => {
@@ -21,16 +22,18 @@ const DashboardMain = () => {
 
   return (
     <div className="flex flex-col md:flex-row h-screen bg-sky-50">
+      <Navbar className="z-1" />
       <DashNav activeScreen={activeScreen} setActiveScreen={setActiveScreen} />
 
       <main
         className="
           flex-1
-          pt-[60px]       /* padding top equal to mobile nav height */
-          md:pt-0         /* no padding top on desktop */
+                /* padding top equal to mobile nav height */
+              /* no padding top on desktop */
           md:ml-[15%]     /* margin left for desktop sidebar width */
           overflow-auto
           min-h-0         /* fixes flex overflow issues */
+          mt-12
         "
       >
         {activeScreen === 1 && (

@@ -15,12 +15,12 @@ function CheckOutModal({ visible, setVisible, dta }) {
 
   const navigate = useNavigate();
   const handleOrder = () => {
-    // setSuccess(true);
     const tempData = {
       totalAmount: totalAmount(dta),
       items: generateCartItem(dta),
     };
     addOrderApi(tempData, navigate);
+    setSuccess(true);
   };
 
   return (

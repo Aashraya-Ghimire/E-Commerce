@@ -44,7 +44,7 @@ const General = () => {
       <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
         {/* Form Section */}
         <div className="space-y-4">
-          <div className="text-2xl font-bold text-gray-800 italic border-b pb-2 border-orange-400">
+          <div className="text-2xl font-bold text-gray-800 border-b pb-2 border-orange-400">
             General Information
           </div>
 
@@ -54,6 +54,7 @@ const General = () => {
             label="Name"
             placeholder="Enter your Name"
             ref={nameRef}
+            className="flex items-center"
           />
           <TextInput
             err={error === 2}
@@ -83,7 +84,7 @@ const General = () => {
 
         {/* Info Text Section */}
         <div className="hidden md:flex flex-col justify-center gap-4 px-4">
-          <div className="text-center text-xl font-semibold italic text-orange-600">
+          <div className="text-center text-xl font-semibold text-orange-600">
             Why Update?
           </div>
           <p className="text-gray-600 text-lg leading-relaxed text-justify">

@@ -10,13 +10,13 @@ const DashNav = ({ activeScreen, setActiveScreen }) => {
   const navigate = useNavigate();
 
   const navItemStyle = (isActive) =>
-    `flex items-center justify-center md:justify-start gap-2 rounded-lg cursor-pointer transition-all duration-200 
+    `flex items-center justify-center md:justify-start gap-2 rounded-lg cursor-pointer transition-all duration-200
     ${
       isActive
-        ? "bg-orange-500 shadow-lg shadow-orange-200 text-white"
-        : "bg-orange-100 text-orange-800 hover:bg-orange-200"
-    } 
-    hover:scale-105 focus:outline-none focus:ring-2 focus:ring-orange-400`;
+        ? "bg-green-600 shadow-lg shadow-green-300 text-white"
+        : "bg-red-100 text-red-800 hover:bg-red-200"
+    }
+    hover:scale-105 focus:outline-none focus:ring-2 focus:ring-green-400`;
 
   const navItems = [
     {
@@ -40,13 +40,9 @@ const DashNav = ({ activeScreen, setActiveScreen }) => {
   return (
     <nav
       className="
-        fixed top-0 left-0 z-50
-
-        w-full h-[60px] flex justify-around items-center
-        bg-gradient-to-b from-orange-100 to-orange-300
-        border-orange-200 shadow-inner
-
-        md:flex-col md:w-[15%] md:h-screen md:space-y-4 md:p-4 md:border-r
+        fixed bottom-0 left-0 w-full h-[60px] mt-17 z-1 bg-gradient-to-b from-red-100 to-red-300 border-t border-red-200 shadow-inner
+        md:fixed md:top-0 md:left-0 md:h-screen md:w-[15%] md:flex-col md:space-y-4 md:p-4 md:border-r
+        flex justify-around items-center md:justify-start
       "
       role="navigation"
       aria-label="Dashboard Navigation"
@@ -55,7 +51,7 @@ const DashNav = ({ activeScreen, setActiveScreen }) => {
         <button
           key={item.id}
           type="button"
-          className={`${navItemStyle(activeScreen === item.id)} 
+          className={`${navItemStyle(activeScreen === item.id)}
             flex flex-col md:flex-row md:p-3 p-2 md:w-full w-auto`}
           onClick={() => {
             if (item.navigateTo) {
@@ -66,9 +62,11 @@ const DashNav = ({ activeScreen, setActiveScreen }) => {
           }}
           aria-current={activeScreen === item.id ? "page" : undefined}
         >
-          {item.icon}
-          {/* Show label only on desktop */}
-          <span className="hidden md:inline font-semibold text-base">
+          {/* Show icon on all screens */}
+          <span className="inline md:inline">{item.icon}</span>
+
+          {/* Show label only on desktop (lg+) */}
+          <span className="hidden lg:inline font-semibold text-base ml-2">
             {item.label}
           </span>
         </button>

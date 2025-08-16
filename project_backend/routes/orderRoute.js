@@ -78,5 +78,20 @@ route.delete("/", async (req, res) => {
     res.status(500).json({ message: "Internal server error" });
   }
 });
+route.patch("/orderDetail", jwtAuthMiddleWare, async (req, res) => {
+  try {
+    // const orderId = req.order.id;
+    const { id, ...updatedOrder } = req.body;
+    const response = await Order.findByIdAndUpdate(id, updatedOrder, {
+      new: true,
+    });
+    res
+      .status(200)
+      .json({ message: "order updated sucessfully", response: response });
+  } catch (error) {
+    console.log("error");
+    res.status(500).json({ message: "Internal server error", error: error });
+  }
+});
 
 module.exports = route;

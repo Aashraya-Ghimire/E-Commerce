@@ -27,7 +27,7 @@ const DeleteAccount = () => {
         <div className="grid grid-cols-1 md:grid-cols-2 gap-10 text-center">
           {/* Delete Account Section */}
           <div className="flex flex-col items-center justify-center space-y-5 px-4">
-            <h2 className="text-2xl font-semibold italic text-red-700">
+            <h2 className="text-2xl font-semibold text-red-700">
               Delete Account
             </h2>
             <p className="text-gray-500 text-sm max-w-xs">
@@ -45,9 +45,7 @@ const DeleteAccount = () => {
 
           {/* Logout Section */}
           <div className="flex flex-col items-center justify-center space-y-5 px-4">
-            <h2 className="text-2xl font-semibold italic text-gray-700">
-              Log Out
-            </h2>
+            <h2 className="text-2xl font-semibold text-gray-700">Log Out</h2>
             <p className="text-gray-500 text-sm max-w-xs">
               Securely log out from your account. You can always log in again
               later.

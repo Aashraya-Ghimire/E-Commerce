@@ -12,9 +12,8 @@ const addOrderApi = async (tempData, navigate) => {
     tempData
   );
   if (request.status == 200) {
-    alert("order placed successfully");
     localStorage.removeItem("cart");
-    navigate("/");
+    // navigate("/");
   } else {
     alert("something went wrong please try again");
   }
