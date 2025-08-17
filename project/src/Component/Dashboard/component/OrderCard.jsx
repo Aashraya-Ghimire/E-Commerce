@@ -4,6 +4,8 @@ import { FaUser, FaPhone, FaTruck, FaMoneyBillWave } from "react-icons/fa";
 import { FaLocationDot } from "react-icons/fa6";
 import OrangeButton from "../../Button/OrangeButton";
 import updateOrderApi from "../../Api/Order/updateOrderApi";
+import { CiDeliveryTruck } from "react-icons/ci";
+import { RiDeleteBin6Line } from "react-icons/ri";
 
 const OrderCard = ({ data }) => {
   const navigate = useNavigate();
@@ -88,11 +90,16 @@ const OrderCard = ({ data }) => {
       <div className="flex flex-col sm:flex-row justify-between items-center gap-3 mt-3">
         {data.status !== "completed" && (
           <OrangeButton
-            title={"Completed"}
+            title={<CiDeliveryTruck className="text-2xl" />}
             className="w-full sm:w-auto py-1"
             onClick={handleUpdate} // 👈 Navigate after update
           />
         )}
+        {/* <div>
+          <button className="cursor-pointer">
+            <RiDeleteBin6Line className="text-2xl text-red-500" />
+          </button>
+        </div> */}
 
         <div className="flex items-center gap-2 text-base font-semibold">
           <FaMoneyBillWave className="text-green-500" />
