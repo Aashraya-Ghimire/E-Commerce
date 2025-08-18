@@ -21,44 +21,26 @@ const DeleteAccount = () => {
   };
 
   return (
-    <>
-      {/* Main Section */}
-      <div className="bg-white border border-gray-200 shadow-md hover:shadow-lg transition-all duration-300 rounded-xl p-6 md:p-10 m-3 md:mx-10">
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-10 text-center">
-          {/* Delete Account Section */}
-          <div className="flex flex-col items-center justify-center space-y-5 px-4">
-            <h2 className="text-2xl font-semibold text-red-700">
-              Delete Account
-            </h2>
-            <p className="text-gray-500 text-sm max-w-xs">
-              Permanently delete your account and all associated data. This
-              action cannot be undone.
-            </p>
-            <button
-              onClick={() => setShowDeleteModal(true)}
-              className="w-full max-w-xs flex items-center justify-center gap-2 border border-red-400 bg-red-500 hover:bg-red-600 hover:border-red-600 text-white px-6 py-2 rounded-md font-semibold shadow-sm hover:shadow-lg transition-all"
-            >
-              <FaTrashAlt className="text-white" />
-              Confirm Delete
-            </button>
-          </div>
+    <div>
+      {/* Buttons Section */}
+      <div className="flex flex-row md:flex-col gap-4 w-full md:justify-center">
+        {/* Logout Button */}
+        <button
+          onClick={() => setShowLogoutModal(true)}
+          className="flex-1 flex items-center gap-4 text-gray-700 font-semibold px-6 py-3 rounded-xl shadow hover:shadow-lg hover:bg-gray-300 transition-all cursor-pointer"
+        >
+          <FaSignOutAlt className="text-gray-700 text-2xl" />
+          <span className="hidden md:inline">Log Out</span>
+        </button>
 
-          {/* Logout Section */}
-          <div className="flex flex-col items-center justify-center space-y-5 px-4">
-            <h2 className="text-2xl font-semibold text-gray-700">Log Out</h2>
-            <p className="text-gray-500 text-sm max-w-xs">
-              Securely log out from your account. You can always log in again
-              later.
-            </p>
-            <button
-              onClick={() => setShowLogoutModal(true)}
-              className="w-full max-w-xs flex items-center justify-center gap-2 border border-gray-400 bg-gray-600 hover:bg-gray-700 hover:border-gray-700 text-white px-6 py-2 rounded-md font-semibold shadow-sm hover:shadow-lg transition-all"
-            >
-              <FaSignOutAlt className="text-white" />
-              Log Out
-            </button>
-          </div>
-        </div>
+        {/* Delete Account Button */}
+        <button
+          onClick={() => setShowDeleteModal(true)}
+          className="flex-1 flex items-center gap-4 text-red-600 font-semibold px-6 py-3 rounded-xl shadow hover:shadow-lg hover:bg-red-100 transition-all cursor-pointer"
+        >
+          <FaTrashAlt className="text-red-600 text-2xl" />
+          <span className="hidden md:inline">Delete Account</span>
+        </button>
       </div>
 
       {/* Logout Modal */}
@@ -126,7 +108,7 @@ const DeleteAccount = () => {
           </div>
         </div>
       )}
-    </>
+    </div>
   );
 };
 

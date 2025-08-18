@@ -20,11 +20,11 @@ const Location = () => {
   }, [data]);
 
   const handleUpdate = () => {
-    if (cityRef.current?.value === "") {
+    if (!cityRef.current?.value) {
       setError(1);
-    } else if (streetRef.current?.value === "") {
+    } else if (!streetRef.current?.value) {
       setError(2);
-    } else if (deliveryDescriptionRef.current?.value === "") {
+    } else if (!deliveryDescriptionRef.current?.value) {
       setError(3);
     } else {
       setError(0);
@@ -38,14 +38,15 @@ const Location = () => {
   };
 
   return (
-    <div className="bg-white border border-gray-200 shadow-md hover:shadow-lg transition duration-300 rounded-xl p-6 md:p-8 m-3 md:mx-10">
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-        {/* Form Section */}
-        <div className="space-y-4 px-3">
-          <div className="text-2xl font-bold text-gray-800 border-b pb-2 border-orange-400">
-            Delivery Information
-          </div>
+    <div className="bg-white border border-gray-200 shadow-lg rounded-2xl p-4 sm:p-6 md:p-10 m-2 sm:m-4 md:mx-12 transition-all hover:shadow-xl">
+      {/* Header */}
+      <div className="text-xl sm:text-2xl font-bold text-gray-800 border-b border-orange-400 pb-2 mb-4 sm:mb-3 text-center md:text-left">
+        Delivery Information
+      </div>
 
+      {/* Form */}
+      <div className="flex flex-col md:flex-row md:flex-wrap md:justify-between gap-4 sm:gap-4">
+        <div className="flex-1 min-w-[200px]">
           <TextInput
             err={error === 1}
             errormessage="Please provide a valid city"
@@ -53,6 +54,8 @@ const Location = () => {
             placeholder="Enter your City"
             ref={cityRef}
           />
+        </div>
+        <div className="flex-1 min-w-[200px]">
           <TextInput
             err={error === 2}
             errormessage="Please provide a valid street"
@@ -60,6 +63,8 @@ const Location = () => {
             placeholder="Enter your Street"
             ref={streetRef}
           />
+        </div>
+        <div className="flex-1 min-w-[200px]">
           <TextInput
             err={error === 3}
             errormessage="Please provide a valid delivery description"
@@ -67,60 +72,45 @@ const Location = () => {
             placeholder="Enter any delivery instructions"
             ref={deliveryDescriptionRef}
           />
-
-          <div className="pt-2">
-            <OrangeButton
-              title="Update"
-              onClick={() => {
-                setShowUpdateModal(true);
-              }}
-            />
-          </div>
-        </div>
-
-        {/* Info Section */}
-        <div className="hidden md:flex flex-col justify-center gap-4 px-4">
-          <div className="text-orange-600 font-bold text-xl text-center">
-            Why it matters?
-          </div>
-          <p className="text-gray-600 text-lg leading-relaxed text-justify">
-            Add or update your delivery details here to avoid delays. Include
-            your <span className="font-medium text-gray-800">street</span>,{" "}
-            <span className="font-medium text-gray-800">city</span>, and any
-            specific{" "}
-            <span className="font-medium text-gray-800">
-              instructions or landmarks
-            </span>{" "}
-            to help our delivery team reach you faster and more accurately.
-          </p>
         </div>
       </div>
+
+      {/* Update Button */}
+      <div className="mt-3 sm:mt-2 flex justify-center md:justify-start">
+        <OrangeButton
+          title="Update"
+          onClick={() => setShowUpdateModal(true)}
+          className="px-6 py-3 transition-all hover:scale-105 w-full sm:w-auto"
+        />
+      </div>
+
       {/* Update Modal */}
       {showUpdateModal && (
-        <div className="fixed inset-0 z-50 bg-opacity-50 backdrop-blur-[7px] flex items-center justify-center">
-          <div className="bg-white rounded-xl p-6 w-[90%] max-w-md text-center shadow-lg animate-fade-in">
-            <div className="flex justify-center mb-4 text-blue-600 text-4xl">
+        <div className="fixed inset-0 z-50 bg-black bg-opacity-30 backdrop-blur-sm flex items-center justify-center p-4">
+          <div className="bg-white rounded-2xl p-4 sm:p-6 md:p-8 w-full max-w-md shadow-2xl animate-fade-in">
+            <div className="flex justify-center mb-4 text-blue-600 text-4xl sm:text-5xl">
               <FaQuestionCircle />
             </div>
-            <h2 className="text-xl font-semibold text-gray-800 mb-2">
+            <h2 className="text-lg sm:text-xl font-semibold text-gray-800 mb-2 text-center">
               Confirm Update?
             </h2>
-            <p className="text-gray-500 mb-6">
+            <p className="text-gray-500 mb-6 text-center text-sm sm:text-base">
               Are you sure you want to update this information?
             </p>
-            <div className="flex justify-center gap-4">
+            <div className="flex flex-col sm:flex-row justify-center gap-4">
               <button
                 onClick={() => setShowUpdateModal(false)}
-                className="flex items-center gap-2 px-5 py-2 bg-gray-200 hover:bg-gray-300 text-gray-700 font-medium rounded-md transition-all"
+                className="flex-1 flex items-center justify-center gap-2 px-5 py-2 bg-gray-200 hover:bg-gray-300 text-gray-700 font-medium rounded-lg transition-all hover:scale-105"
               >
                 <FaTimesCircle />
                 Cancel
               </button>
               <button
                 onClick={() => {
-                  setShowUpdateModal(false), handleUpdate();
+                  setShowUpdateModal(false);
+                  handleUpdate();
                 }}
-                className="flex items-center gap-2 px-5 py-2 bg-blue-500 hover:bg-blue-600 text-white font-medium rounded-md transition-all"
+                className="flex-1 flex items-center justify-center gap-2 px-5 py-2 bg-blue-500 hover:bg-blue-600 text-white font-medium rounded-lg transition-all hover:scale-105"
               >
                 <FaQuestionCircle />
                 Yes, Update

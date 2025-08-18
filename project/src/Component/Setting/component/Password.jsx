@@ -5,7 +5,6 @@ import changePassword from "../../Api/User/changePassword";
 import { FaQuestionCircle, FaTimesCircle } from "react-icons/fa";
 
 const Password = () => {
-  const token = localStorage.getItem("token");
   const prevPasswordRef = useRef();
   const currentPasswordRef = useRef();
   const [error, setError] = useState(0);
@@ -28,9 +27,9 @@ const Password = () => {
 
   return (
     <div className="bg-white border border-gray-200 shadow-md hover:shadow-lg transition duration-300 rounded-xl p-6 md:p-8 m-3 md:mx-10">
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+      <div className="flex flex-col lg:flex-row gap-6">
         {/* Form Section */}
-        <div className="space-y-4 px-3">
+        <div className="flex-1 space-y-4 px-3">
           <div className="text-2xl font-bold text-gray-800 border-b pb-2 border-orange-400">
             Change Password
           </div>
@@ -50,22 +49,21 @@ const Password = () => {
             ref={currentPasswordRef}
           />
 
-          <div className="pt-2">
+          <div className="pt-2 flex justify-center lg:justify-start">
             <OrangeButton
               title="Update"
-              onClick={() => {
-                setShowUpdateModal(true);
-              }}
+              onClick={() => setShowUpdateModal(true)}
+              className="w-full sm:w-auto"
             />
           </div>
         </div>
 
         {/* Info Section */}
-        <div className="hidden md:flex flex-col justify-center gap-4 px-4">
-          <div className="text-orange-600 font-bold text-xl text-center">
+        <div className="flex-1 flex flex-col gap-4 px-3 lg:px-4 mt-4 lg:mt-0">
+          <div className="text-orange-600 font-bold text-xl text-center lg:text-left">
             Protect Your Account
           </div>
-          <p className="text-gray-600 text-lg leading-relaxed text-justify">
+          <p className="text-gray-600 text-base lg:text-lg leading-relaxed text-justify">
             Regularly updating your password is essential for maintaining
             account security. Enter your{" "}
             <span className="font-medium text-gray-800">old password</span> and
@@ -75,6 +73,7 @@ const Password = () => {
           </p>
         </div>
       </div>
+
       {/* Update Modal */}
       {showUpdateModal && (
         <div className="fixed inset-0 z-50 bg-opacity-50 backdrop-blur-[7px] flex items-center justify-center">
@@ -88,20 +87,20 @@ const Password = () => {
             <p className="text-gray-500 mb-6">
               Are you sure you want to update this information?
             </p>
-            <div className="flex justify-center gap-4">
+            <div className="flex flex-col sm:flex-row justify-center gap-4">
               <button
                 onClick={() => setShowUpdateModal(false)}
-                className="flex items-center gap-2 px-5 py-2 bg-gray-200 hover:bg-gray-300 text-gray-700 font-medium rounded-md transition-all"
+                className="flex items-center justify-center gap-2 px-5 py-2 bg-gray-200 hover:bg-gray-300 text-gray-700 font-medium rounded-md transition-all"
               >
                 <FaTimesCircle />
                 Cancel
               </button>
               <button
                 onClick={() => {
-                  handleUpdate(), setShowUpdateModal(false);
-                  console.log("Update confirmed");
+                  handleUpdate();
+                  setShowUpdateModal(false);
                 }}
-                className="flex items-center gap-2 px-5 py-2 bg-blue-500 hover:bg-blue-600 text-white font-medium rounded-md transition-all"
+                className="flex items-center justify-center gap-2 px-5 py-2 bg-blue-500 hover:bg-blue-600 text-white font-medium rounded-md transition-all"
               >
                 <FaQuestionCircle />
                 Yes, Update
