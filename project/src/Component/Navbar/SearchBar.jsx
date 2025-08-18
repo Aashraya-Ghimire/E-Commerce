@@ -7,7 +7,7 @@ const SearchBar = ({ setProductData, maindata }) => {
   const [search, setSearch] = useState("");
 
   const handleSearch = () => {
-    const element = document.getElementById("product");
+    const element = document.getElementById("item");
     if (element) {
       element.scrollIntoView({ behavior: "smooth" });
     }
