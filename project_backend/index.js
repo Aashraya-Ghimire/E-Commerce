@@ -11,6 +11,7 @@ const userRoute = require("./routes/userRoute.js");
 app.use(express.json());
 app.use(cors());
 
+app.use("/public", express.static("public"));
 const PORT = process.env.PORT || 3000;
 
 app.get("/", (req, res) => {
