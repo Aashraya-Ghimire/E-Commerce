@@ -29,11 +29,11 @@ function Productinfo({ data, setShowmodel, item }) {
       onClick={(e) => e.stopPropagation()}
     >
       {/* Image Section */}
-      <div className="relative w-full md:w-1/2 h-64 sm:h-80 md:h-auto flex-shrink-0">
+      <div className="relative w-full md:w-1/2 flex-shrink-0">
         <img
           src={data?.image}
           alt={data?.pName}
-          className="w-full h-full object-cover rounded-t-3xl md:rounded-l-3xl md:rounded-t-none"
+          className="w-full h-auto md:h-full object-cover rounded-t-3xl md:rounded-l-3xl md:rounded-t-none aspect-[4/3] sm:aspect-[16/9]"
         />
         <button
           className="h-8 w-8 absolute top-2 left-2 z-10 bg-red-500 rounded-full text-white text-xl flex items-center justify-center"
@@ -44,14 +44,14 @@ function Productinfo({ data, setShowmodel, item }) {
       </div>
 
       {/* Info Section */}
-      <div className="w-full md:w-1/2 p-4 sm:p-6 flex flex-col justify-between max-h-[calc(100vh-16rem)] overflow-y-auto md:max-h-full">
+      <div className="w-fit md:w-1/2 p-4 sm:p-6 flex flex-col justify-between overflow-y-auto ">
         <div>
-          <div className="text-xs sm:text-sm text-gray-400 uppercase tracking-widest mb-2 text-center md:text-left">
+          <div className="text-xs sm:text-sm text-gray-400 uppercase tracking-widest text-center md:text-left">
             {data?.category}
           </div>
 
-          <div className="flex flex-col sm:flex-row sm:justify-between sm:items-start gap-2 mb-3">
-            <h2 className="text-lg sm:text-xl font-bold text-gray-800 text-center sm:text-left">
+          <div className="flex flex-col sm:flex-row sm:justify-between sm:items-start gap-2">
+            <h2 className="text-lg sm:text-xl font-bold text-gray-800 text-center sm:text-left my-2">
               {data?.pName}
             </h2>
             <div className="flex justify-center sm:justify-start gap-[2px] text-yellow-400 text-base">
@@ -85,7 +85,7 @@ function Productinfo({ data, setShowmodel, item }) {
         </div>
 
         {/* Description */}
-        <div className="mb-4">
+        <div className="">
           <div className="text-gray-700 font-semibold mb-1 text-lg">
             Description
           </div>
@@ -95,8 +95,10 @@ function Productinfo({ data, setShowmodel, item }) {
         </div>
 
         {/* Features */}
-        <div className="mt-2">
-          <h3 className="text-sm font-semibold text-gray-700 mb-1">Features</h3>
+        <div>
+          <h3 className="text-gray-700 font-semibold mb-1 text-lg my-2">
+            Features
+          </h3>
           <ul className="list-disc list-inside text-sm sm:text-base text-gray-600 space-y-[2px]">
             {Array.isArray(data?.features) ? (
               data.features.map((features, index) => (
@@ -109,7 +111,7 @@ function Productinfo({ data, setShowmodel, item }) {
         </div>
 
         {/* Price & Button */}
-        <div className="flex flex-col sm:flex-row justify-between items-center gap-3 mt-4">
+        <div className="flex flex-col sm:flex-row justify-between items-center gap-3 mt-2">
           {/* Price */}
           <span className="text-lg sm:text-xl font-semibold text-green-600">
             Rs {data?.price}

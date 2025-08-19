@@ -9,6 +9,7 @@ import Setting from "./Component/Setting/Setting.jsx";
 import Home from "./Home.jsx";
 import AddProduct from "./Component/AddProduct/AddProduct.jsx";
 import DashboardMain from "./Component/Dashboard/DashboardMain.jsx";
+import OnlyProduct from "./Component/Product/OnlyProduct.jsx";
 const router = createBrowserRouter([
   {
     path: "/",
@@ -26,6 +27,7 @@ const router = createBrowserRouter([
       { path: "/dashboard", element: <DashboardMain /> },
 
       { path: "/product", element: <AddProduct /> },
+      { path: "/products", element: <OnlyProduct /> },
     ],
   },
 ]);

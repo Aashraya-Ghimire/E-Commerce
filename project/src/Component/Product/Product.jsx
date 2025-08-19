@@ -1,6 +1,16 @@
+import { useState } from "react";
 import Items from "../pages/home/Items";
+import { useNavigate } from "react-router";
+import Button from "../Button/Button";
 
 const Product = ({ productData }) => {
+  const [visibleCount, setVisibleCount] = useState(15);
+  const navigate = useNavigate();
+
+  const handleShowMore = () => {
+    navigate("/products"); // redirect to the OnlyProduct page
+  };
+
   return (
     <div id="item">
       <div>
@@ -11,8 +21,20 @@ const Product = ({ productData }) => {
         </div>
 
         <div>
-          <Items productData={productData} />
+          {/* Slice data so only visibleCount products are shown */}
+          <Items productData={productData.slice(0, visibleCount)} />
         </div>
+
+        {/* Show More button only if there are more products left */}
+        {visibleCount < productData.length && (
+          <div className="flex justify-center my-6">
+            <Button
+              title={"Show More"}
+              onClick={handleShowMore}
+              className="px-6 py-2 bg-green-600 text-white rounded-lg shadow hover:bg-green-700 transition"
+            />
+          </div>
+        )}
       </div>
     </div>
   );
