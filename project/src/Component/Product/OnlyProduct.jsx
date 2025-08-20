@@ -12,7 +12,6 @@ const OnlyProduct = () => {
   const [priceRange, setPriceRange] = useState([0, 100000]);
   const [minRating, setMinRating] = useState(0);
   const [inStockOnly, setInStockOnly] = useState(false);
-  const [searchText, setSearchText] = useState(""); // new search state
 
   // Extract unique categories
   const categories = useMemo(() => {
@@ -28,12 +27,10 @@ const OnlyProduct = () => {
         !p.price || (p.price >= priceRange[0] && p.price <= priceRange[1]);
       const inRating = !p.rating || p.rating >= minRating;
       const inStock = !inStockOnly || (p.stock && p.stock > 0);
-      const matchesSearch =
-        !searchText || p.name.toLowerCase().includes(searchText.toLowerCase()); // search filter
 
-      return inCategory && inPrice && inRating && inStock && matchesSearch;
+      return inCategory && inPrice && inRating && inStock;
     });
-  }, [productData, category, priceRange, minRating, inStockOnly, searchText]);
+  }, [productData, category, priceRange, minRating, inStockOnly]);
 
   const [data, setData] = useState(filteredProducts);
   useEffect(() => {
@@ -57,20 +54,6 @@ const OnlyProduct = () => {
       <main className="flex-1 max-w-7xl mx-auto px-6 py-12 mt-10">
         {/* Filters + Search */}
         <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-6 mb-8 bg-white p-4 rounded-xl shadow-sm">
-          {/* Search Bar */}
-          <div className="w-full md:w-1/3">
-            <label className="block text-sm font-medium text-gray-700 mb-1">
-              Search Products
-            </label>
-            <input
-              type="text"
-              value={searchText}
-              onChange={(e) => setSearchText(e.target.value)}
-              placeholder="Search by name..."
-              className="border rounded-lg px-4 py-2 w-full"
-            />
-          </div>
-
           {/* Category Filter */}
           <div>
             <label className="block text-sm font-medium text-gray-700 mb-1">
