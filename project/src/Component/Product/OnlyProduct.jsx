@@ -108,7 +108,7 @@ const OnlyProduct = () => {
           </div>
 
           {/* In Stock Filter */}
-          <div className="flex items-center mt-2 md:mt-0">
+          <div className="flex items-center items-center mt-2 md:mt-0">
             <input
               type="checkbox"
               id="inStock"
