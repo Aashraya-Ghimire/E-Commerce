@@ -6,7 +6,6 @@ const deleteUserApi = async () => {
     "content-type": "application/json",
     Authorization: `Bearer ${localStorage.getItem("token")}`,
   });
-  console.log(userDetail);
   if (request.status == 200) {
     alert("account deleted sucessfully");
     localStorage.removeItem("token");

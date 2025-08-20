@@ -3,6 +3,7 @@ import TextInput from "../../../InputField/TextInput";
 import OrangeButton from "../../../Button/OrangeButton";
 import signupApi from "../../../Api/Auth/signupApi";
 import { useNavigate } from "react-router";
+import Loading from "../../../Ui/Loading";
 
 const PasswordUser = ({ userDetail, setUserDetail, setStage }) => {
   const navigate = useNavigate();
@@ -10,8 +11,9 @@ const PasswordUser = ({ userDetail, setUserDetail, setStage }) => {
   const errorMessageRef = useRef();
   const passwordRef = useRef();
   const confirmPasswordRef = useRef();
+  const [loading, setLoading] = useState(false);
 
-  const handelSend = () => {
+  const handelSend = async () => {
     if (passwordRef.current.value.length < 8) {
       errorMessageRef.current = "password must be 8 character long";
       setError(1);
@@ -22,10 +24,16 @@ const PasswordUser = ({ userDetail, setUserDetail, setStage }) => {
       errorMessageRef.current = "Password and confirm passwords did not match";
       setError(2);
     } else {
-      setError(0);
-      let tempUserDetail = userDetail;
-      tempUserDetail.password = passwordRef.current.value;
-      signupApi(tempUserDetail, navigate, setStage, setUserDetail);
+      try {
+        setError(0);
+        setLoading(true);
+        let tempUserDetail = userDetail;
+        tempUserDetail.password = passwordRef.current.value;
+        await signupApi(tempUserDetail, navigate, setStage, setUserDetail);
+      } catch (error) {
+      } finally {
+        setLoading(false);
+      }
     }
   };
 
@@ -48,8 +56,12 @@ const PasswordUser = ({ userDetail, setUserDetail, setStage }) => {
         errormessage={errorMessageRef.current}
         type={"password"}
       />
-      <div>
-        <OrangeButton title={"SignUp"} onClick={() => handelSend()} />
+      <div className="flex justify-center">
+        {loading ? (
+          <Loading />
+        ) : (
+          <OrangeButton title={"SignUp"} onClick={() => handelSend()} />
+        )}
       </div>
     </div>
   );

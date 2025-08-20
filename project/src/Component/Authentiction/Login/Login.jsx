@@ -3,28 +3,36 @@ import OrangeButton from "../../Button/OrangeButton";
 import { useNavigate } from "react-router";
 import loginApi from "../../Api/Auth/loginApi";
 import TextInput from "../../InputField/TextInput";
+import Loading from "../../Ui/Loading";
 
 const Login = ({ setScreen }) => {
   const navigate = useNavigate();
   const userNameRef = useRef();
   const passwordRef = useRef();
+  const [loading, setLoading] = useState(false);
   const [err, setErr] = useState(0);
 
-  const handleLogin = () => {
+  const handleLogin = async () => {
     if (userNameRef.current?.value === "") {
       setErr(1);
     } else if (passwordRef.current?.value === "") {
       setErr(2);
     } else {
-      setErr(0);
-      loginApi(
-        {
-          userName: userNameRef.current.value,
-          password: passwordRef.current.value,
-        },
-        navigate,
-        setErr
-      );
+      try {
+        setLoading(true);
+        setErr(0);
+        await loginApi(
+          {
+            userName: userNameRef.current.value,
+            password: passwordRef.current.value,
+          },
+          navigate,
+          setErr
+        );
+      } catch (error) {
+      } finally {
+        setLoading(false);
+      }
     }
   };
 
@@ -55,7 +63,11 @@ const Login = ({ setScreen }) => {
 
       {/* Submit Button */}
       <div className="flex justify-center mt-2">
-        <OrangeButton title="Login" onClick={handleLogin} />
+        {loading ? (
+          <Loading />
+        ) : (
+          <OrangeButton title="Login" onClick={handleLogin} />
+        )}
       </div>
 
       {/* Signup Toggle */}
