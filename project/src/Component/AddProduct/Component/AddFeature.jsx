@@ -11,7 +11,7 @@ const AddFeature = ({ productDetail, setProductDetail }) => {
       ...productDetail,
       features: [...productDetail.features, features.trim()],
     });
-    setFeatures(""); // clear input after adding
+    setFeatures("");
   };
   const handleRemoveFeature = () => {
     setFeatures(" ");

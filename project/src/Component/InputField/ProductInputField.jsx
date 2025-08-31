@@ -22,7 +22,7 @@ const ProductInputField = ({
         onChange={handleChange}
       />
       {productDetail[name] === "" && (
-        <p className="text-red-500 text-[10px]">Please provide an input</p>
+        <p className="text-red-500 text-[10px]"></p>
       )}
     </div>
   );

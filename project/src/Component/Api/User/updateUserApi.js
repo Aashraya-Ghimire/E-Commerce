@@ -13,7 +13,6 @@ const updateUserApi = async (updatedData) => {
   );
 
   const response = await request.json();
-  console.log("updatedData", updatedData);
   if (request.status == 200) {
     console.log("request", response);
     localStorage.setItem("userDetail", JSON.stringify(response.response));
