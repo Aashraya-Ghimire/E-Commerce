@@ -9,6 +9,7 @@ const Product = ({ productData }) => {
 
   const handleShowMore = () => {
     navigate("/products"); // redirect to the OnlyProduct page
+    window.scrollTo({ top: 0, behavior: "smooth" });
   };
 
   return (
@@ -21,11 +22,8 @@ const Product = ({ productData }) => {
         </div>
 
         <div>
-          {/* Slice data so only visibleCount products are shown */}
           <Items productData={productData.slice(0, visibleCount)} />
         </div>
-
-        {/* Show More button only if there are more products left */}
         {visibleCount < productData.length && (
           <div className="flex justify-center my-6">
             <Button

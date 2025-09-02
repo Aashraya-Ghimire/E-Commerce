@@ -36,6 +36,7 @@ const OnlyProduct = () => {
   useEffect(() => {
     setData(filteredProducts);
   }, [filteredProducts]);
+
   return (
     <div className="min-h-screen bg-gray-50">
       <Navbar setProductData={setData} maindata={productData} />
@@ -53,16 +54,16 @@ const OnlyProduct = () => {
       {/* Product Section */}
       <main className="flex-1 max-w-7xl mx-auto px-6 py-12 mt-10">
         {/* Filters + Search */}
-        <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-6 mb-8 bg-white p-4 rounded-xl shadow-sm">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 mb-8 bg-white p-6 rounded-xl shadow-md">
           {/* Category Filter */}
-          <div>
-            <label className="block text-sm font-medium text-gray-700 mb-1">
+          <div className="flex flex-col">
+            <label className="block text-sm font-medium text-gray-700 mb-2">
               Category
             </label>
             <select
               value={category}
               onChange={(e) => setCategory(e.target.value)}
-              className="border rounded-lg px-4 py-2"
+              className="border rounded-lg px-4 h-10 w-full text-sm"
             >
               {categories.map((cat, i) => (
                 <option key={i} value={cat}>
@@ -73,30 +74,44 @@ const OnlyProduct = () => {
           </div>
 
           {/* Price Range Filter */}
-          <div className="w-full md:w-1/3">
-            <label className="block text-sm font-medium text-gray-700 mb-1">
-              Price Range: Rs {priceRange[0]} - Rs {priceRange[1]}
+          <div className="flex flex-col">
+            <label className="block text-sm font-medium text-gray-700 mb-2">
+              Price Range
             </label>
-            <input
-              type="range"
-              min="0"
-              max="100000"
-              step="1000"
-              value={priceRange[1]}
-              onChange={(e) => setPriceRange([0, Number(e.target.value)])}
-              className="w-full"
-            />
+            <div className="flex items-center gap-2">
+              <input
+                type="number"
+                value={priceRange[0]}
+                onChange={(e) =>
+                  setPriceRange([Number(e.target.value), priceRange[1]])
+                }
+                min="0"
+                className="w-1/2 border rounded-lg px-2 h-10 text-sm"
+                placeholder="Min"
+              />
+              <span className="text-gray-500">-</span>
+              <input
+                type="number"
+                value={priceRange[1]}
+                onChange={(e) =>
+                  setPriceRange([priceRange[0], Number(e.target.value)])
+                }
+                min="0"
+                className="w-1/2 border rounded-lg px-2 h-10 text-sm"
+                placeholder="Max"
+              />
+            </div>
           </div>
 
           {/* Rating Filter */}
-          <div>
-            <label className="block text-sm font-medium text-gray-700 mb-1">
+          <div className="flex flex-col">
+            <label className="block text-sm font-medium text-gray-700 mb-2">
               Minimum Rating
             </label>
             <select
               value={minRating}
               onChange={(e) => setMinRating(Number(e.target.value))}
-              className="border rounded-lg px-4 py-2"
+              className="border rounded-lg px-4 h-10 w-full text-sm"
             >
               <option value={0}>All Ratings</option>
               <option value={1}>⭐ 1 & up</option>
@@ -108,17 +123,22 @@ const OnlyProduct = () => {
           </div>
 
           {/* In Stock Filter */}
-          <div className="flex items-center mt-2 md:mt-0">
-            <input
-              type="checkbox"
-              id="inStock"
-              checked={inStockOnly}
-              onChange={(e) => setInStockOnly(e.target.checked)}
-              className="h-4 w-4 text-green-600 border-gray-300 rounded"
-            />
-            <label htmlFor="inStock" className="ml-2 text-gray-700 text-sm">
-              In Stock Only
+          <div className="flex flex-col justify-center">
+            <label className="block text-sm font-medium text-gray-700 mb-2">
+              Availability
             </label>
+            <div className="flex items-center h-10">
+              <input
+                type="checkbox"
+                id="inStock"
+                checked={inStockOnly}
+                onChange={(e) => setInStockOnly(e.target.checked)}
+                className="h-4 w-4 text-green-600 border-gray-300 rounded"
+              />
+              <label htmlFor="inStock" className="ml-2 text-gray-700 text-sm">
+                In Stock Only
+              </label>
+            </div>
           </div>
         </div>
 
