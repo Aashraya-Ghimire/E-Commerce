@@ -5,6 +5,7 @@ const ProductInputField = ({
   label,
   name,
   productDetail,
+  placeholder,
 }) => {
   const handleChange = (e) => {
     setProductDetail({
@@ -19,6 +20,7 @@ const ProductInputField = ({
       <input
         className="outline-none p-1 border rounded-sm text-sm w-full"
         value={productDetail[name] || ""}
+        placeholder={placeholder}
         onChange={handleChange}
       />
       {productDetail[name] === "" && (

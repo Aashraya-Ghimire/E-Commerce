@@ -29,6 +29,7 @@ const AddFeature = ({ productDetail, setProductDetail }) => {
         <input
           type="text"
           value={features}
+          placeholder="Features of Product"
           onChange={(e) => setFeatures(e.target.value)}
           className="border outline-none rounded-md p-1 w-full"
         />

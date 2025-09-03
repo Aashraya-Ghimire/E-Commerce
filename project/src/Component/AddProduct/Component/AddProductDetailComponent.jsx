@@ -11,6 +11,7 @@ const AddProductDetailComponent = ({ setProductDetail, productDetail }) => {
         setProductDetail={setProductDetail}
         label="Product Name"
         name="pName"
+        placeholder="Enter Product Name"
         productDetail={productDetail}
       />
 
@@ -26,16 +27,17 @@ const AddProductDetailComponent = ({ setProductDetail, productDetail }) => {
           setProductDetail={setProductDetail}
           label="Rating"
           name="rating"
+          placeholder="Enter product Rating"
           productDetail={productDetail}
         />
         <ProductInputField
           setProductDetail={setProductDetail}
           label="Price"
           name="price"
+          placeholder="Enter product Price"
           productDetail={productDetail}
         />
       </div>
-
       <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
         {/* Category Selector */}
         <AddCategory
@@ -47,6 +49,7 @@ const AddProductDetailComponent = ({ setProductDetail, productDetail }) => {
           setProductDetail={setProductDetail}
           label="Stock"
           name="stock"
+          placeholder="Enter product Stocks"
           productDetail={productDetail}
         />
       </div>
@@ -56,6 +59,7 @@ const AddProductDetailComponent = ({ setProductDetail, productDetail }) => {
         setProductDetail={setProductDetail}
         label="Description"
         name="description"
+        placeholder="Enter product Descriptions"
         productDetail={productDetail}
       />
 
@@ -64,6 +68,7 @@ const AddProductDetailComponent = ({ setProductDetail, productDetail }) => {
         setProductDetail={setProductDetail}
         label="Image URL"
         name="image"
+        placeholder="Enter product Image link"
         productDetail={productDetail}
       />
     </div>
